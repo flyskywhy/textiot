@@ -1,0 +1,199 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+repositories {
+    maven {
+        url 'https://dl.bintray.com/textile/maven'
+    }
+}
+
+android {
+    compileSdkVersion targetSdk
+
+    defaultConfig {
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName '1.0'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'TEST_CAFE_URL', '"'+getTestCafeURL()+'"'
+        buildConfigField 'String', 'TEST_CAFE_TOKEN', '"'+getTestCafeToken()+'"'
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // Textile
+    api "io.textile:pb:$textileVersion"
+    api "io.textile:mobile:$textileVersion"
+
+    // Support
+    implementation "androidx.appcompat:appcompat:$androidxAppcompatVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-common-java8:$androidxLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidxLifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$androidxLifecycleVersion"
+
+    // UploadService
+    implementation "com.github.textileio:android-upload-service:$uploadServiceVersion"
+
+    // Testing
+    testImplementation "junit:junit:$junitVersion"
+
+    // Core library
+    // androidTestImplementation "androidx.test:core:$androidxTestCoreVersion"
+
+    // AndroidJUnitRunner and JUnit Rules
+    // androidTestImplementation "androidx.test:runner:$androidxTestRunnerVersion"
+    // androidTestImplementation "androidx.test:rules:$androidxTestRulesVersion"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
+    // Assertions
+    // androidTestImplementation "androidx.test.ext:junit:$androidxTestExtJunitVersion"
+    // androidTestImplementation "androidx.test.ext:truth:$androidxTestExtTruthVersion"
+
+    // Utils
+    androidTestImplementation "org.awaitility:awaitility:$awaitilityVersion"
+    androidTestImplementation "commons-io:commons-io:$commonsIOVersion"
+}
+
+group = publishedGroupId
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId publishedGroupId
+            artifactId artifact
+
+            name libraryName
+            description libraryDescription
+            url siteUrl
+
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+
+        pom.withXml {
+            def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+            // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+            configurations.implementation.allDependencies.each {
+                // Ensure dependencies such as fileTree are not included.
+                if (it.name != 'unspecified') {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    destinationDir = new File("$rootProject.projectDir/docs")
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompileProvider.get().classpath.files
+    })
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = String.valueOf(System.getenv('BINTRAY_USERNAME'))
+	key = String.valueOf(System.getenv('BINTRAY_API_KEY'))
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+        }
+    }
+}
+
+def getTestCafeURL() {
+    try {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty('test.cafe.url')
+    } catch (Exception e) {
+        return String.valueOf(System.getenv('TEST_CAFE_URL'))
+    }
+}
+
+def getTestCafeToken() {
+    try {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty('test.cafe.token')
+    } catch (Exception e) {
+        return String.valueOf(System.getenv('TEST_CAFE_TOKEN'))
+    }
+}
