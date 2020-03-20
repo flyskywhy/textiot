@@ -1,0 +1,74 @@
+version: 2
+
+defaults: &defaults
+    working_directory: ~/js-http-client
+    docker:
+        - image: node:10.0.0
+
+jobs:
+    lint-test:
+        <<: *defaults    
+        steps:
+            - checkout
+            - restore_cache:
+                key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+            - restore_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+            - run: yarn install
+            - run:
+                name: Lint
+                command: |
+                    yarn lint
+            - save_cache:
+                key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+                paths:
+                    - ~/.cache/yarn
+            - save_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+                paths:
+                    - node_modules
+            - run:
+                name: Test
+                command: |
+                    mkdir -p test-results/jest
+                    yarn test
+                environment:
+                    JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+            - store_test_results:
+                path: test-results
+            - store_artifacts:
+                path: test-results
+    deploy:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+            - restore_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+            - run: yarn install
+            - attach_workspace:
+                at: ~/js-http-client
+            - run:
+                name: Authenticate
+                command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/js-http-client/.npmrc
+            - run:
+                name: Publish Package
+                command: npm publish --access=public --unsafe-perm
+                        
+workflows:
+    version: 2
+    js-http-client:
+        jobs:
+            - lint-test:
+                filters:
+                    tags:
+                        only: /.*/
+            - deploy:
+                requires:
+                    - lint-test
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        ignore: /.*/

@@ -1,0 +1,640 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@textile/js-http-client</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@textile/js-http-client</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @textile/js-http-client</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="textile-js-http-client-js-http-client-">Textile JS HTTP Client <em>(js-http-client)</em></h1>
+				<p><a href="https://www.textile.io">Textile</a> provides encrypted, recoverable, schema-based, and cross-application data storage built on <a href="https://github.com/ipfs">IPFS</a> and <a href="https://github.com/libp2p">libp2p</a>. We like to think of it as a decentralized data wallet with built-in protocols for sharing and recovery, or more simply, <strong>an open and programmable iCloud</strong>.</p>
+				<p>The reference implementation of Textile is <a href="https://github.com/textileio/go-textile">written in Go</a>, and can be compiled to various platforms, including mobile (Android/iOS) and desktop/server (OSX, Windows, Linux, etc). The <code>js-http-client</code> library is designed to help support things like browser-based Textile apps, Node.js apps, and other use-cases.</p>
+				<p>This library provides access to an underlying <code>go-textile</code> node&#39;s REST API, adding various simplified APIs to support in-browser and programmatic desktop access. For the most part, the API would mimic the command-line and/or mobile APIs of <code>go-textile</code>, with some browser-specific enhancements.</p>
+				<h2 id="install">Install</h2>
+				<p><code>js-http-client</code> is available on <a href="https://www.npmjs.com/package/@textile/js-http-client"><code>npmjs.com</code></a> under the <code>@textile</code> scope. Install it using your favorite package manager:</p>
+				<pre><code class="language-sh">yarn add @textile/js-http-client
+<span class="hljs-comment"># npm i @textile/js-http-client</span></code></pre>
+				<h2 id="usage">Usage</h2>
+				<pre><code class="language-javascript"><span class="hljs-comment">// Import the main Textile client</span>
+<span class="hljs-keyword">const</span> { Textile } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@textile/js-http-client"</span>);
+
+<span class="hljs-comment">// Create an instance of the client using the default options</span>
+<span class="hljs-keyword">const</span> textile = <span class="hljs-keyword">new</span> Textile();
+
+<span class="hljs-comment">// Or, create an instance specifying your custom Textile node API connection</span>
+<span class="hljs-keyword">const</span> textile = <span class="hljs-keyword">new</span> Textile({
+  <span class="hljs-attr">url</span>: <span class="hljs-string">"http://127.0.0.1"</span>,
+  <span class="hljs-attr">port</span>: <span class="hljs-number">40602</span>,
+});
+
+<span class="hljs-comment">// Get your local Textile account's contact info</span>
+<span class="hljs-keyword">const</span> contact = <span class="hljs-keyword">await</span> textile.account.contact();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`My display name is '<span class="hljs-subst">${contact.name}</span>'`</span>);
+<span class="hljs-comment">// &gt; My display name is 'clyde'.</span>
+
+<span class="hljs-comment">// Get your Textile node's address</span>
+<span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> textile.profile.address();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`My node's address is '<span class="hljs-subst">${address}</span>'`</span>);
+<span class="hljs-comment">// &gt; My node's address is 'P69vwxHTh1p5...'</span>
+
+<span class="hljs-comment">// Get a paginated list of files</span>
+<span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> textile.files.list()
+});
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"files"</span>, files.items);</code></pre>
+				<p>For more detailed examples of usage, peruse the <code>examples</code> folder and see the <a href="https://textileio.github.io/js-http-client/">live <code>docs</code></a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/addthreadconfig.html">Add<wbr>Thread<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/block.html">Block</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/cafehttprequest.html">CafeHTTPRequest</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/caferequest.html">Cafe<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/directory.html">Directory</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/feedrequest.html">Feed<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/keys.html">Keys</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/link.html">Link</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/loglevel.html">Log<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/message.html">Message</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/mobilepreparedfiles.html">Mobile<wbr>Prepared<wbr>Files</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/mobilequeryevent.html">Mobile<wbr>Query<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/node.html">Node</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/notification.html">Notification</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/pubsubquery.html">Pub<wbr>Sub<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/query.html">Query</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/queryoptions.html">Query<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/thread.html">Thread</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/threadfiles.html">Thread<wbr>Files</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/walletupdate.html">Wallet<wbr>Update</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/mobileeventtype.html" class="tsd-kind-icon">Mobile<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/account.html" class="tsd-kind-icon">Account</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/blocks.html" class="tsd-kind-icon">Blocks</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/cafes.html" class="tsd-kind-icon">Cafes</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/comments.html" class="tsd-kind-icon">Comments</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/config.html" class="tsd-kind-icon">Config</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/contacts.html" class="tsd-kind-icon">Contacts</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/events.html" class="tsd-kind-icon">Events</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/feed.html" class="tsd-kind-icon">Feed</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/file.html" class="tsd-kind-icon">File</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/files.html" class="tsd-kind-icon">Files</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/ipfs.html" class="tsd-kind-icon">IPFS</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/invites.html" class="tsd-kind-icon">Invites</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/likes.html" class="tsd-kind-icon">Likes</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/logs.html" class="tsd-kind-icon">Logs</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/messages.html" class="tsd-kind-icon">Messages</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/mills.html" class="tsd-kind-icon">Mills</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/nodereadable.html" class="tsd-kind-icon">Node<wbr>Readable</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/notifications.html" class="tsd-kind-icon">Notifications</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/observe.html" class="tsd-kind-icon">Observe</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/profile.html" class="tsd-kind-icon">Profile</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/schemamiller.html" class="tsd-kind-icon">Schema<wbr>Miller</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/schemas.html" class="tsd-kind-icon">Schemas</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/snapshots.html" class="tsd-kind-icon">Snapshots</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/textile.html" class="tsd-kind-icon">Textile</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/threads.html" class="tsd-kind-icon">Threads</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/tokens.html" class="tsd-kind-icon">Tokens</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/utils.html" class="tsd-kind-icon">Utils</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/announce.html" class="tsd-kind-icon">Announce</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/apioptions.html" class="tsd-kind-icon">Api<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/blocklist.html" class="tsd-kind-icon">Block<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/blockmessage.html" class="tsd-kind-icon">Block<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/blockviz.html" class="tsd-kind-icon">Block<wbr>Viz</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafe.html" class="tsd-kind-icon">Cafe</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafechallenge.html" class="tsd-kind-icon">Cafe<wbr>Challenge</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafecheckmessages.html" class="tsd-kind-icon">Cafe<wbr>Check<wbr>Messages</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeclient.html" class="tsd-kind-icon">Cafe<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeclientlist.html" class="tsd-kind-icon">Cafe<wbr>Client<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeclientmessage.html" class="tsd-kind-icon">Cafe<wbr>Client<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeclientnonce.html" class="tsd-kind-icon">Cafe<wbr>Client<wbr>Nonce</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeclientthread.html" class="tsd-kind-icon">Cafe<wbr>Client<wbr>Thread</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafedeletemessages.html" class="tsd-kind-icon">Cafe<wbr>Delete<wbr>Messages</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafedeletemessagesack.html" class="tsd-kind-icon">Cafe<wbr>Delete<wbr>Messages<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafedelivermessage.html" class="tsd-kind-icon">Cafe<wbr>Deliver<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafederegistration.html" class="tsd-kind-icon">Cafe<wbr>Deregistration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafederegistrationack.html" class="tsd-kind-icon">Cafe<wbr>Deregistration<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafemessage.html" class="tsd-kind-icon">Cafe<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafemessages.html" class="tsd-kind-icon">Cafe<wbr>Messages</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafenonce.html" class="tsd-kind-icon">Cafe<wbr>Nonce</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeobject.html" class="tsd-kind-icon">Cafe<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeobjectlist.html" class="tsd-kind-icon">Cafe<wbr>Object<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafepublishpeer.html" class="tsd-kind-icon">Cafe<wbr>Publish<wbr>Peer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafepublishpeerack.html" class="tsd-kind-icon">Cafe<wbr>Publish<wbr>Peer<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/caferefreshsession.html" class="tsd-kind-icon">Cafe<wbr>Refresh<wbr>Session</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/caferegistration.html" class="tsd-kind-icon">Cafe<wbr>Registration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/caferequestgroupstatus.html" class="tsd-kind-icon">Cafe<wbr>Request<wbr>Group<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/caferequestlist.html" class="tsd-kind-icon">Cafe<wbr>Request<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafesession.html" class="tsd-kind-icon">Cafe<wbr>Session</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafesessionlist.html" class="tsd-kind-icon">Cafe<wbr>Session<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafestore.html" class="tsd-kind-icon">Cafe<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafestoreack.html" class="tsd-kind-icon">Cafe<wbr>Store<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafestorethread.html" class="tsd-kind-icon">Cafe<wbr>Store<wbr>Thread</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafestorethreadack.html" class="tsd-kind-icon">Cafe<wbr>Store<wbr>Thread<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafetoken.html" class="tsd-kind-icon">Cafe<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeunstore.html" class="tsd-kind-icon">Cafe<wbr>Unstore</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeunstoreack.html" class="tsd-kind-icon">Cafe<wbr>Unstore<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeunstorethread.html" class="tsd-kind-icon">Cafe<wbr>Unstore<wbr>Thread</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cafeunstorethreadack.html" class="tsd-kind-icon">Cafe<wbr>Unstore<wbr>Thread<wbr>Ack</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/comment.html" class="tsd-kind-icon">Comment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentlist.html" class="tsd-kind-icon">Comment<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contact.html" class="tsd-kind-icon">Contact</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactlist.html" class="tsd-kind-icon">Contact<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactquery.html" class="tsd-kind-icon">Contact<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/directorylist.html" class="tsd-kind-icon">Directory<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/envelope.html" class="tsd-kind-icon">Envelope</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/error.html" class="tsd-kind-icon">Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/externalinvite.html" class="tsd-kind-icon">External<wbr>Invite</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/feeditem.html" class="tsd-kind-icon">Feed<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/feeditemlist.html" class="tsd-kind-icon">Feed<wbr>Item<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fileindex.html" class="tsd-kind-icon">File<wbr>Index</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fileslist.html" class="tsd-kind-icon">Files<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/flag.html" class="tsd-kind-icon">Flag</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ignore.html" class="tsd-kind-icon">Ignore</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invite.html" class="tsd-kind-icon">Invite</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitelist.html" class="tsd-kind-icon">Invite<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/inviteview.html" class="tsd-kind-icon">Invite<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/inviteviewlist.html" class="tsd-kind-icon">Invite<wbr>View<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/join.html" class="tsd-kind-icon">Join</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/leave.html" class="tsd-kind-icon">Leave</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/like.html" class="tsd-kind-icon">Like</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/likelist.html" class="tsd-kind-icon">Like<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/merge.html" class="tsd-kind-icon">Merge</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/mobilewalletaccount.html" class="tsd-kind-icon">Mobile<wbr>Wallet<wbr>Account</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/notificationlist.html" class="tsd-kind-icon">Notification<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/peer.html" class="tsd-kind-icon">Peer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/peerlist.html" class="tsd-kind-icon">Peer<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pubsubqueryresults.html" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Query<wbr>Results</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/queryresult.html" class="tsd-kind-icon">Query<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/queryresults.html" class="tsd-kind-icon">Query<wbr>Results</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/step.html" class="tsd-kind-icon">Step</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/summary.html" class="tsd-kind-icon">Summary</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/text.html" class="tsd-kind-icon">Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textlist.html" class="tsd-kind-icon">Text<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textileoptions.html" class="tsd-kind-icon">Textile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadadd.html" class="tsd-kind-icon">Thread<wbr>Add</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadannounce.html" class="tsd-kind-icon">Thread<wbr>Announce</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadblock.html" class="tsd-kind-icon">Thread<wbr>Block</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadblockheader.html" class="tsd-kind-icon">Thread<wbr>Block<wbr>Header</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadcomment.html" class="tsd-kind-icon">Thread<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadenvelope.html" class="tsd-kind-icon">Thread<wbr>Envelope</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadflag.html" class="tsd-kind-icon">Thread<wbr>Flag</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadignore.html" class="tsd-kind-icon">Thread<wbr>Ignore</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadjoin.html" class="tsd-kind-icon">Thread<wbr>Join</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadlike.html" class="tsd-kind-icon">Thread<wbr>Like</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadlist.html" class="tsd-kind-icon">Thread<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadmessage.html" class="tsd-kind-icon">Thread<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadpeer.html" class="tsd-kind-icon">Thread<wbr>Peer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/threadsnapshotquery.html" class="tsd-kind-icon">Thread<wbr>Snapshot<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/user.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/versions.html" class="tsd-kind-icon">Versions</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#feedmodes" class="tsd-kind-icon">Feed<wbr>Modes</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#keyvalue" class="tsd-kind-icon">Key<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#millfunction" class="tsd-kind-icon">Mill<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#millopts" class="tsd-kind-icon">Mill<wbr>Opts</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#threadsharing" class="tsd-kind-icon">Thread<wbr>Sharing</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#threadtype" class="tsd-kind-icon">Thread<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createheaders" class="tsd-kind-icon">create<wbr>Headers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#getargs" class="tsd-kind-icon">get<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#getopts" class="tsd-kind-icon">get<wbr>Opts</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#readablenodetoweb" class="tsd-kind-icon">readable<wbr>Node<wbr>ToWeb</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#readablewebtonode" class="tsd-kind-icon">readable<wbr>Web<wbr>ToNode</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#streamhandler" class="tsd-kind-icon">stream<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#default_api_options" class="tsd-kind-icon">DEFAULT_<wbr>API_<wbr>OPTIONS</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
