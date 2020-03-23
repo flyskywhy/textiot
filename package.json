@@ -1,0 +1,35 @@
+{
+  "name": "textiot",
+  "version": "0.7.8",
+  "description": "A framework for building web and native (IoT) Dapps on the IPFS network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flyskywhy/textiot.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "web",
+    "android",
+    "ios",
+    "native",
+    "Dapps",
+    "decentralized",
+    "IPFS",
+    "libp2p",
+    "encrypted",
+    "textiot",
+    "IoT",
+    "textile"
+  ],
+  "author": "Li Zheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flyskywhy/textiot/issues"
+  },
+  "homepage": "https://github.com/flyskywhy/textiot#readme"
+}
