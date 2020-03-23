@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    apply from: './manifest.gradle'
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+    }
+}
+
+android {
+    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : targetSdk
+
+    defaultConfig {
+        minSdkVersion minSdk
+        targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : targetSdk
+        versionCode 1
+        versionName computeVersionName()
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven {
+        url "$rootDir/../../react-native/android"
+    }
+    maven {
+        url 'https://dl.bintray.com/textile/maven'
+    }
+}
+
+dependencies {
+    api "io.textile:textile:$textileVersion"
+    implementation "com.facebook.react:react-native:+"
+}
+
+import groovy.json.JsonSlurper
+
+def computeVersionName() {
+    def slurper = new JsonSlurper()
+    def json = slurper.parse(file('../package.json'), "utf-8")
+    return json.version
+}
