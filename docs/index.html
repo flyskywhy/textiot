@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Textile  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Textile  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Textile Docs</a> (80% documented)</p>
+        <p class="header-right"><a href="https://github.com/textileio/ios-textile"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Textile Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Textile  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/AccountApi.html">AccountApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/CafesApi.html">CafesApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/CommentsApi.html">CommentsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ContactsApi.html">ContactsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FeedApi.html">FeedApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FeedItemData.html">FeedItemData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FilesApi.html">FilesApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FlagsApi.html">FlagsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/IgnoresApi.html">IgnoresApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/InvitesApi.html">InvitesApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/IpfsApi.html">IpfsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/LikesApi.html">LikesApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/LogsApi.html">LogsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MessagesApi.html">MessagesApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NotificationsApi.html">NotificationsApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ProfileApi.html">ProfileApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SchemasApi.html">SchemasApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Textile.html">Textile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ThreadsApi.html">ThreadsApi</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@TEXTILE_BACKGROUND_SESSION_ID">TEXTILE_BACKGROUND_SESSION_ID</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/TextileDelegate.html">TextileDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Type%20Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Type%20Definitions/FeedItemType.html">FeedItemType</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='ios-textile' class='heading'>ios-textile</h1>
+
+<p><a href="https://textile.io"><img src="https://img.shields.io/badge/made%20by-Textile-informational.svg?style=popout-square" alt="Made by Textile"></a>
+<a href="https://slack.textile.io"><img src="https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=popout-square" alt="Chat on Slack"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/textileio/ios-textile.svg?style=popout-square" alt="GitHub license"></a>
+<a href="https://circleci.com/gh/textileio/ios-textile"><img src="https://img.shields.io/circleci/project/github/textileio/ios-textile/master.svg?style=popout-square" alt="CircleCI branch"></a>
+<a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=popout-square" alt="standard-readme compliant"></a>
+<img src="https://img.shields.io/badge/platform-ios-lightgrey.svg?style=popout-square" alt="Platform">
+<a href="https://cocoapods.org/pods/Textile"><img src="https://img.shields.io/cocoapods/v/Textile.svg?style=popout-square" alt="Version"></a></p>
+
+<blockquote>
+<p>Textile provides encrypted, recoverable, schema-based, and cross-application data storage built on IPFS and libp2p. We like to think of it as a decentralized data wallet with built-in protocols for sharing and recovery, or more simply, an open and programmable iCloud.</p>
+</blockquote>
+<h2 id='table-of-contents' class='heading'>Table of Contents</h2>
+
+<ul>
+<li><a href="#install">Install</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#maintainers">Maintainers</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id='install' class='heading'>Install</h2>
+
+<p>Textile is available through <a href="https://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'Textile'</span>
+</code></pre>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>To learn about Textile usage, please head over to the <a href="https://docs.textile.io/">Textile documentation</a> and be sure to read the <a href="https://docs.textile.io/develop/clients/ios/">iOS getting started guide</a>.</p>
+
+<p>This repo contains an example project. To run it, clone the repo and install pods. Next, open <code>Example/Textile.xcworkspace</code> with Xcode and build and run the <code>Textile-Example</code> scheme.</p>
+<pre class="highlight plaintext"><code>git clone https://github.com/textileio/ios-textile.git
+cd ios-textile/Example
+pod repo update &amp;&amp; pod install
+open Textile.xcworkspace
+</code></pre>
+<h2 id='maintainers' class='heading'>Maintainers</h2>
+
+<p><a href="https://github.com/asutula">@asutula</a>
+<a href="https://github.com/sanderpick">@sanderpick</a></p>
+<h2 id='contributing' class='heading'>Contributing</h2>
+
+<p>PRs accepted.</p>
+
+<p>Small note: If editing the README, please conform to the <a href="https://github.com/RichardLitt/standard-readme">standard-readme</a> specification.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>MIT © 2019 Textile</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://textile.io" target="_blank" rel="external">Textile</a>. All rights reserved. (Last updated: 2019-11-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

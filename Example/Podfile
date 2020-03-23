@@ -1,0 +1,27 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'Textile_Example' do
+  pod 'Textile', :path => '../'
+
+  target 'TestsContainer' do
+  end
+
+  target 'Textile_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+    pod 'Expecta'
+    pod 'OCMockito'
+  end
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+      end
+    end
+  end
+
+end
