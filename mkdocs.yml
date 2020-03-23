@@ -1,0 +1,137 @@
+# Project information
+site_name: "Textile Documentation"
+site_description: "Encrypted, recoverable, schema-based, cross-application data storage built on IPFS and LibP2P."
+site_author: textile.io
+site_url: https://docs.textile.io/
+
+# Repository
+repo_name: textileio/docs
+repo_url: https://github.com/textileio/docs
+
+# Copyright
+copyright: "&copy; Textile"
+
+# Configuration
+theme:
+  name: null
+  custom_dir: material
+  language: en
+  feature:
+    tabs: false
+  palette:
+    primary: default
+    accent: default
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: images/favicon.ico
+  logo: images/logo_pink.svg
+  static_templates:
+    - 404.html
+
+extra_javascript:
+  - js/sidebar.js
+
+extra_css:
+  - css/textile.css
+
+# Plugins
+plugins:
+  - search
+  - codeyaml
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.attr_list
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: textileio
+      repo: docs
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - markdown_captions
+
+# Page tree
+nav:
+  - Welcome!: index.md
+  - Install:
+      - The Daemon: install/the-daemon.md
+      - Desktop: install/desktop.md
+      - Apps: install/apps.md
+  - A Tour of Textile: a-tour-of-textile.md
+  - Concepts:
+      - Introduction: concepts/index.md
+      - The Wallet: concepts/the-wallet.md
+      - Contacts: concepts/contacts.md
+      - Threads:
+          - Introduction: concepts/threads/index.md
+          - Files: concepts/threads/files.md
+      - Cafes: concepts/cafes.md
+      - Search: concepts/search.md
+  - Connectors:
+      - Introduction: connectors/index.md
+      - Images & Media: connectors/images/index.md
+      - Documents: connectors/documents/index.md
+      - Games: connectors/games/index.md
+  - Develop:
+      - Clients:
+          - Command-line: develop/clients/command-line.md
+          - JavaScript: develop/clients/javascript.md
+          - React Native: develop/clients/react-native.md
+          - iOS: develop/clients/ios.md
+          - Android: develop/clients/android.md
+      - The HTTP API: develop/the-http-api.md
+      - IPFS Gateway: develop/ipfs-gateway.md
+      - Peer Config File: develop/peer-config-file.md
+  - Policies:
+      - Code of Conduct: policies/code-of-conduct.md
+      - Privacy Policy: policies/privacy-policy.md
+      - Terms of Service: policies/terms-of-service.md
+      - License: policies/license.md
+
+# Customization
+extra:
+  social:
+    - type: globe
+      link: https://textile.io
+    - type: github-alt
+      link: https://github.com/textileio
+    - type: twitter
+      link: https://twitter.com/textileio
+    - type: medium
+      link: https://medium.com/textileio
+    - type: slack
+      link: https://slack.textile.io
+  go_textile:
+    - version: v0.1.11
+  yamls:
+    - name: common
+      yaml: snippets/common
+    - name: a_tour_of_textile
+      yaml: snippets/a_tour_of_textile
+    - name: connectors
+      yaml: snippets/connectors
+    - name: special
+      yaml: snippets/special
