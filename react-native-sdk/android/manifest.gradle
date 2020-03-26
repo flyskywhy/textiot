@@ -6,6 +6,25 @@ ext {
     gradleVersion = '3.4.1'
     mavenGradleVersion = '2.1'
 
+    // Library and app testing dependencies versions
+    junitVersion = '4.12'
+    // androidxTestCoreVersion = '1.2.0'
+    // androidxTestRunnerVersion = '1.2.0'
+    // androidxTestRulesVersion = '1.2.0'
+    // androidxTestExtJunitVersion = '1.1.1'
+    // androidxTestExtTruthVersion = '1.2.0'
+    // androidxTestEspressoVersion = '3.2.0'
+    testRunnerVersion = '1.0.2'
+
+    // Library and app dependencies versions
+    androidxAppcompatVersion = '1.0.2'
+
     // Textile
     textileVersion = '2.1.2'
+
+    // Lifecycle
+    androidxLifecycleVersion = '2.0.0'
+
+    // UploadService
+    uploadServiceVersion = '3.5.5'
 }

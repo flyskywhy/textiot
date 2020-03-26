@@ -44,12 +44,13 @@ android {
 
 dependencies {
     // Textile
-    api "io.textile:pb:$textileVersion"
-    api "io.textile:mobile:$textileVersion"
+    api project(":pb-androidx")
+    api project(":mobile")
 
     // Support
     implementation "androidx.appcompat:appcompat:$androidxAppcompatVersion"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    api "com.google.protobuf:protobuf-java:3.6.1"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-common-java8:$androidxLifecycleVersion"
@@ -68,7 +69,7 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     // androidTestImplementation "androidx.test:runner:$androidxTestRunnerVersion"
     // androidTestImplementation "androidx.test:rules:$androidxTestRulesVersion"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
 
     // Assertions
     // androidTestImplementation "androidx.test.ext:junit:$androidxTestExtJunitVersion"
@@ -152,7 +153,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives javadocJar
+    // archives javadocJar
     archives sourcesJar
 }
 

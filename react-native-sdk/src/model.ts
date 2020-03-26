@@ -7,9 +7,9 @@ import {
   IJoin,
   ILeave,
   IAnnounce
-} from '@textile/js-types'
+} from '../../go-textile/release/@textile/js-types'
 
-export * from '@textile/js-types'
+export * from '../../go-textile/release/@textile/js-types'
 
 export class EventSubscription {
   cancel: () => void

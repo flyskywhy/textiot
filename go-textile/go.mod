@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412
+	github.com/ahmetb/govvv v0.3.0 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/chzyer/logex v1.1.10 // indirect
@@ -56,7 +57,8 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/xeipuuv/gojsonschema v1.1.0
 	go.uber.org/fx v1.9.0
-	golang.org/x/crypto v0.0.0-20190926180335-cea2066c6411
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
+	golang.org/x/mobile v0.0.0-20200222142934-3c8601c510d0 // indirect
 	google.golang.org/genproto v0.0.0-20190502173448-54afdca5d873 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0-20170531160350-a96e63847dc3

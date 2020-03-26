@@ -1,1 +1,1 @@
-include ':app', ':textile'
+include ':app', ':textile', 'mobile', 'pb-android', 'pb-androidx'

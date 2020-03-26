@@ -16,7 +16,11 @@ lint:
 
 textile:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
-	go install -ldflags "-w $(FLAGS)" github.com/textileio/go-textile/cmd/textile
+	go build -ldflags "-extldflags -static -w $(FLAGS)" github.com/textileio/go-textile/cmd/textile
+
+textile-arm:
+	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
+	CGO_ENABLED=1 GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf-gcc go build -ldflags "-extldflags -static -w $(FLAGS)" -i -o textile-arm cmd/textile/main.go
 
 ios:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
@@ -26,7 +30,7 @@ ios:
 
 android:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
-	env go111module=off gomobile bind -ldflags "-w $(FLAGS)" -v -target=android -o mobile.aar github.com/textileio/go-textile/mobile github.com/textileio/go-textile/core
+	gomobile bind -ldflags "-w $(FLAGS)" -v -target=android -o mobile.aar github.com/textileio/go-textile/mobile github.com/textileio/go-textile/core
 	mkdir -p mobile/dist/android/ && mv mobile.aar mobile/dist/android/
 
 protos:

@@ -1,6 +1,8 @@
 **/node_modules/*
 dist/textile
 dist/go-textile-*
+/vendor/
+release/PBProject/pb/src/main/java
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
