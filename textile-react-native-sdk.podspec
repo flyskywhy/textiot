@@ -1,0 +1,1 @@
+react-native-sdk/textile-react-native-sdk.podspec
