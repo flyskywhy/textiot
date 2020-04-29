@@ -4,3 +4,4 @@
 /go-textile/release/@textile/js-types/dist/
 /node_modules/
 package-lock.json
+*-e

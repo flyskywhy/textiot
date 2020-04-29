@@ -18,13 +18,25 @@ textile:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
 	go build -ldflags "-extldflags -static -w $(FLAGS)" github.com/textileio/go-textile/cmd/textile
 
+textile-win:
+	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
+	CGO_ENABLED=1 GOOS=windows CC=x86_64-w64-mingw32-gcc go build -ldflags "-extldflags -static -w $(FLAGS)" github.com/textileio/go-textile/cmd/textile
+
+textile-mac:
+	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
+	go build -ldflags "-w $(FLAGS)" -o textile-mac github.com/textileio/go-textile/cmd/textile
+
+textile-mac-osxcross:
+	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
+	CGO_ENABLED=1 GOOS=darwin CC=o64-clang go build -ldflags "-w $(FLAGS)" -o textile-mac-osxcross github.com/textileio/go-textile/cmd/textile
+
 textile-arm:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
 	CGO_ENABLED=1 GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf-gcc go build -ldflags "-extldflags -static -w $(FLAGS)" -i -o textile-arm cmd/textile/main.go
 
 ios:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
-	env go111module=off gomobile bind -ldflags "-w $(FLAGS)" -v -target=ios github.com/textileio/go-textile/mobile github.com/textileio/go-textile/core
+	gomobile bind -ldflags "-w $(FLAGS)" -v -target=ios github.com/textileio/go-textile/mobile github.com/textileio/go-textile/core
 	mkdir -p mobile/dist/ios/ && cp -r Mobile.framework mobile/dist/ios/
 	rm -rf Mobile.framework
 

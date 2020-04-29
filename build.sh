@@ -5,15 +5,25 @@ set -euo pipefail
 ## setup go-textile
 (cd go-textile; make setup)
 
-## x86-linux
+## x64-linux
 (cd go-textile; make textile)
+
+## x64-windows
+(cd go-textile; make textile-win)
 
 ## arm-linux
 (cd go-textile; make textile-arm)
 
 ## android
 ### textile-mobile
-(cd go-textile; go mod vendor; make android)
+(
+    cd go-textile
+    mkdir -p ~/go/src/github.com/textileio
+    rm -f ~/go/src/github.com/textileio/go-textile
+    ln -s `pwd` ~/go/src/github.com/textileio/go-textile
+    go mod vendor
+    make android
+)
 ### textile-pb
 (
     cd go-textile
@@ -45,12 +55,14 @@ set -euo pipefail
 npm install --no-package-lock
 (
     cd node_modules/protobufjs
-    sed -i "s/\"jsdoc\": \".*\"/\"jsdoc\": \"3.5.5\"/" package.json
+    sed -i -e "s/\"jsdoc\": \".*\"/\"jsdoc\": \"3.5.5\"/" package.json
     cd cli
     npm install jsdoc@3.5.5
-    sed -i "s/\"|null\"/\"\"/" targets/static.js
-    sed -i "s/field.optional.*: prop/prop/" targets/static.js
-    sed -i "s/\"|null|undefined\"/\"\"/" targets/static.js
+
+    # ref to https://github.com/textileio/protobuf.js/commit/40a20a28e980c17cc3e9c199660c18a5c2a42f2c
+    sed -i -e "s/\"|null\"/\"\"/" targets/static.js
+    sed -i -e "s/field.optional.*: prop/prop/" targets/static.js
+    sed -i -e "s/\"|null|undefined\"/\"\"/" targets/static.js
 )
 ./node_modules/protobufjs/bin/pbjs -t static-module -w es6 -o go-textile/release/@textile/js-types/dist/index.js go-textile/pb/protos/*
 ./node_modules/protobufjs/bin/pbts -o go-textile/release/@textile/js-types/dist/index.d.ts go-textile/release/@textile/js-types/dist/index.js
@@ -61,6 +73,8 @@ npm install --no-package-lock
     npm run build
     rm -fr node_modules
 )
+# .npmignore include bellow actions
+#rm -fr node_modules
 
 ## js-http-client
 ## The `tsc` in `npm run build` will failed if there is some parent `node_modules/` as
