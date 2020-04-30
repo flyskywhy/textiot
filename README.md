@@ -13,6 +13,11 @@ For RN < 0.60, run `react-native link textiot`.
 For RN < 0.60 or >= 0.60, then:
 
 #### Android
+Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
+
+    cd node_modules/textiot/
+    ./build.sh
+
 Add bellow into `android/settings.gradle`
 
 androidx not android:
@@ -40,6 +45,11 @@ and `cd node_modules/textiot/react-native-sdk; ./androidx2android.sh`
     require('textiot/react-native-sdk').default;
 
 #### iOS
+Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
+
+    cd node_modules/textiot/
+    ./build-mac.sh
+
 Add bellow (after `pod 'Folly'`) into `ios/Podfile`
 ```
   pod 'Textile', :path => '../node_modules/textiot/ios-textile'

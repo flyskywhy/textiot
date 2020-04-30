@@ -1,1 +1,4 @@
 /vendor/
+/textile*
+/mobile/dist/android/mobile.aar
+/mobile/dist/ios/Mobile.framework/
