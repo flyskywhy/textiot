@@ -26,6 +26,8 @@ textile-mac:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
 	go build -ldflags "-w $(FLAGS)" -o textile-mac github.com/textileio/go-textile/cmd/textile
 
+# [osxcross](https://github.com/tpoechtrager/osxcross) can be installed step by step ref to
+# https://enigma-dev.org/docs/wiki/index.php?title=CrossCompileLinuxOSX
 textile-mac-osxcross:
 	$(eval FLAGS := $$(shell govvv -flags | sed 's/main/github.com\/textileio\/go-textile\/common/g'))
 	CGO_ENABLED=1 GOOS=darwin CC=o64-clang go build -ldflags "-w $(FLAGS)" -o textile-mac-osxcross github.com/textileio/go-textile/cmd/textile

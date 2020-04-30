@@ -16,7 +16,17 @@ For RN < 0.60 or >= 0.60, then:
 Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
 
     cd node_modules/textiot/
-    ./build.sh
+    ./build-post-npm.sh
+
+results:
+```
+go-textile/textile
+go-textile/textile.exe
+go-textile/textile-arm
+android-textile/mobile
+react-native-sdk/textile-androidx
+react-native-sdk/textile-android
+```
 
 Add bellow into `android/settings.gradle`
 
@@ -48,7 +58,13 @@ and `cd node_modules/textiot/react-native-sdk; ./androidx2android.sh`
 Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
 
     cd node_modules/textiot/
-    ./build-mac.sh
+    ./build-mac-post-npm.sh
+
+results:
+```
+go-textile/textile-mac
+go-textile/mobile/dist/ios/Mobile.framework/
+```
 
 Add bellow (after `pod 'Folly'`) into `ios/Podfile`
 ```
@@ -114,11 +130,9 @@ On macOS, even changed `com.google.protobuf:protobuf-java:3.6.1` to `com.google.
 
 And, the result of `protoc --proto_path=./pb/protos --objc_out=./mobile/dist/ios/protos ./pb/protos/*` on Linux and macOS is different.
 
-So all will be built by `build.sh` on Linux except `mobile/dist/ios/protos` and `mobile/dist/ios/Mobile.framework/` by `build-ios.sh` on macOS.
+So all will be built by `build.sh` on Linux except `mobile/dist/ios/protos` and `mobile/dist/ios/Mobile.framework/` by `build-mac.sh` on macOS.
 
 #### suod apt install mingw-w64 gcc-arm-linux-gnueabihf
-
-#### [osxcross](https://github.com/tpoechtrager/osxcross) , can install it step by step ref to https://enigma-dev.org/docs/wiki/index.php?title=CrossCompileLinuxOSX
 
 #### Xcode on macOS
 
@@ -137,7 +151,6 @@ android-textile/mobile
 react-native-sdk/textile-androidx
 react-native-sdk/textile-android
 react-native-sdk/dist/index.js
-js-http-client/dist/index.js
 ```
 
 ### Build on macOS
@@ -151,4 +164,11 @@ go-textile/mobile/dist/ios/Mobile.framework/
 go-textile/mobile/dist/ios/protos/
 ```
 
-Then `scp` these results to Linux to complete the npm publish.
+### Build on macOS
+
+    ./build-web.sh
+
+results:
+```
+js-http-client/dist/index.js
+```

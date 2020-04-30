@@ -2,28 +2,9 @@
 
 set -euo pipefail
 
-## setup go-textile
-(cd go-textile; make setup)
-
-## x64-linux
-(cd go-textile; make textile)
-
-## x64-windows
-(cd go-textile; make textile-win)
-
-## arm-linux
-(cd go-textile; make textile-arm)
+./build-post-npm.sh
 
 ## android
-### textile-mobile
-(
-    cd go-textile
-    mkdir -p ~/go/src/github.com/textileio
-    rm -f ~/go/src/github.com/textileio/go-textile
-    ln -s `pwd` ~/go/src/github.com/textileio/go-textile
-    go mod vendor
-    make android
-)
 ### textile-pb
 (
     cd go-textile
@@ -36,18 +17,6 @@ set -euo pipefail
     ./android2androidx.sh
     ./gradlew pb:build
     mv pb/build/outputs/aar/pb-release.aar dist/android/pb-androidx.aar
-)
-### android-textile
-(
-    cd android-textile
-    ./androidx2android.sh
-    ./gradlew androidDependencies
-    ./gradlew textile:build
-    mv textile/build/outputs/aar/textile-release.aar dist/textile-android.aar
-    ./android2androidx.sh
-    ./gradlew androidDependencies
-    ./gradlew textile:build
-    mv textile/build/outputs/aar/textile-release.aar dist/textile-androidx.aar
 )
 
 ## react-native
@@ -73,5 +42,4 @@ npm install --no-package-lock
     npm run build
     rm -fr node_modules
 )
-# .npmignore include bellow actions
-#rm -fr node_modules
+rm -fr node_modules
