@@ -5,12 +5,6 @@
   "nativePackage": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/*",
-    "ios/*",
-    "android/*",
-    "textile-react-native-sdk.podspec"
-  ],
   "scripts": {
     "build": "rm -rf dist/ && tsc",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx .",
