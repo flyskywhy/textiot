@@ -4,6 +4,7 @@
   "description": "A framework for building web and native (IoT) Dapps on the IPFS network",
   "main": "index.js",
   "scripts": {
+    "postinstall": "./post-install.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
