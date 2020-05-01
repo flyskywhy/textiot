@@ -58,12 +58,13 @@ and `cd node_modules/textiot/react-native-sdk; ./androidx2android.sh`
 Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
 
     cd node_modules/textiot/
-    ./build-mac-post-npm.sh
+    ./build-mac.sh
 
 results:
 ```
 go-textile/textile-mac
 go-textile/mobile/dist/ios/Mobile.framework/
+go-textile/mobile/dist/ios/protos/
 ```
 
 Add bellow (after `pod 'Folly'`) into `ios/Podfile`
