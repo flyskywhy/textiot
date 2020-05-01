@@ -39,7 +39,7 @@ project(':textile-mobile').projectDir = new File(rootProject.projectDir, '../nod
 include ':android-textile'
 project(':android-textile').projectDir = new File(rootProject.projectDir, '../node_modules/textiot/react-native-sdk/textile-androidx')
 ```
-and `cd node_modules/textiot/react-native-sdk; ./android2androidx.sh`
+and `cd node_modules/textiot; ./android2androidx.sh`
 
 android not androidx:
 ```
@@ -50,7 +50,7 @@ project(':textile-mobile').projectDir = new File(rootProject.projectDir, '../nod
 include ':android-textile'
 project(':android-textile').projectDir = new File(rootProject.projectDir, '../node_modules/textiot/react-native-sdk/textile-android')
 ```
-and `cd node_modules/textiot/react-native-sdk; ./androidx2android.sh`
+and `cd node_modules/textiot; ./androidx2android.sh`
 
     require('textiot/react-native-sdk').default;
 
