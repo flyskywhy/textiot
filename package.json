@@ -1,6 +1,6 @@
 {
   "name": "textiot",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "A framework for building web and native (IoT) Dapps on the IPFS network",
   "main": "index.js",
   "scripts": {
