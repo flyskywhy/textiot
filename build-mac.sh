@@ -6,7 +6,7 @@ set -euo pipefail
 (cd go-textile; make setup)
 
 ## x64-macos
-(cd go-textile; make textile-mac)
+(cd go-textile; rm -f textile-mac; make textile-mac)
 
 ## ios
 ### textile-mobile

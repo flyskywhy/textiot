@@ -6,13 +6,13 @@ set -euo pipefail
 (cd go-textile; make setup)
 
 ## x64-linux
-(cd go-textile; make textile)
+(cd go-textile; rm -f textile; make textile)
 
 ## x64-windows
-(cd go-textile; make textile-win)
+(cd go-textile; rm -f textile.exe; make textile-win)
 
 ## arm-linux
-(cd go-textile; make textile-arm)
+(cd go-textile; rm -f textile-arm; make textile-arm)
 
 ## android
 ### textile-mobile

@@ -13,21 +13,6 @@ For RN < 0.60, run `react-native link textiot`.
 For RN < 0.60 or >= 0.60, then:
 
 #### Android
-Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
-
-    cd node_modules/textiot/
-    ./build-post-npm.sh
-
-results:
-```
-go-textile/textile
-go-textile/textile.exe
-go-textile/textile-arm
-android-textile/mobile
-react-native-sdk/textile-androidx
-react-native-sdk/textile-android
-```
-
 Add bellow into `android/settings.gradle`
 
 androidx not android:
@@ -53,6 +38,21 @@ project(':android-textile').projectDir = new File(rootProject.projectDir, '../no
 and `cd node_modules/textiot; ./androidx2android.sh`
 
     require('textiot/react-native-sdk').default;
+
+Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
+
+    cd node_modules/textiot/
+    ./build-post-npm.sh
+
+results:
+```
+go-textile/textile
+go-textile/textile.exe
+go-textile/textile-arm
+android-textile/mobile
+react-native-sdk/textile-androidx
+react-native-sdk/textile-android
+```
 
 #### iOS
 Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
@@ -132,6 +132,20 @@ On macOS, even changed `com.google.protobuf:protobuf-java:3.6.1` to `com.google.
 And, the result of `protoc --proto_path=./pb/protos --objc_out=./mobile/dist/ios/protos ./pb/protos/*` on Linux and macOS is different.
 
 So all will be built by `build.sh` on Linux except `mobile/dist/ios/protos` and `mobile/dist/ios/Mobile.framework/` by `build-mac.sh` on macOS.
+
+#### protoc-gen-go 7e65e51
+If you modify `go-textile/pb/protos/*.proto`, then you also need regenerate `go-textile/pb/*.pb.go` by an exact version of protoc-gen-go which match protoc 3.x
+
+    go get -d -u github.com/golang/protobuf/protoc-gen-go
+    cd ~/go/src/github.com/golang/protobuf/protoc-gen-go
+    git checkout 7e65e51
+    go build
+    mv protoc-gen-go ~/go/bin/
+
+regenerate:
+
+    cd go-textile
+    make protos
 
 #### suod apt install mingw-w64 gcc-arm-linux-gnueabihf
 
