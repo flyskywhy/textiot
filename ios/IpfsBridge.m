@@ -40,6 +40,12 @@ RCT_EXPORT_METHOD(connect:(NSString*)multiaddr resolver:(RCTPromiseResolveBlock)
   }
 }
 
+RCT_EXPORT_METHOD(peers:(BOOL)verbose latency:(BOOL)latency streams:(BOOL)streams direction:(BOOL)direction resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  NSError *error;
+  SwarmPeerList *list = [Textile.instance.ipfs swarmPeers:verbose latency:latency streams:streams direction:direction error:&error];
+  fulfillWithResult([list.data base64EncodedStringWithOptions:0], error, resolve, reject);
+}
+
 RCT_EXPORT_METHOD(dataAtPath:(NSString*)pth resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [Textile.instance.ipfs dataAtPath:pth completion:^(NSData * _Nullable data, NSString * _Nullable mediaType, NSError * _Nonnull error) {
     NSDictionary *result = @{

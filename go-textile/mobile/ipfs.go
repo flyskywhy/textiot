@@ -8,6 +8,7 @@ import (
 	"github.com/golang/protobuf/ptypes/any"
 	ipld "github.com/ipfs/go-ipld-format"
 	iface "github.com/ipfs/interface-go-ipfs-core"
+	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/segmentio/ksuid"
 	"github.com/textileio/go-textile/broadcast"
 	"github.com/textileio/go-textile/core"
@@ -40,6 +41,43 @@ func (m *Mobile) SwarmConnect(address string) (string, error) {
 	}
 
 	return results[0], nil
+}
+
+// SwarmPeers Lists the set of peers this node is connected to
+func (m *Mobile) SwarmPeers(verbose bool, latency bool, streams bool, direction bool) ([]byte, error) {
+	if !m.node.Started() {
+		return nil, core.ErrStopped
+	}
+
+	connInfos, err := ipfs.SwarmPeers(m.node.Ipfs(), verbose == true, latency == true, streams == true, direction == true)
+	if err != nil {
+		return nil, err
+	}
+
+	peers := &pb.SwarmPeerList{Peers: make([]*pb.SwarmPeer, 0)}
+	for _, c := range connInfos.Peers {
+		ci := &pb.SwarmPeer{Addr: c.Addr, Peer: c.Peer}
+		if c.Latency != "" {
+			ci.Latency = c.Latency
+		}
+		if c.Muxer != "" {
+			ci.Muxer = c.Muxer
+		}
+		if c.Direction == network.DirInbound {
+			ci.Direction = 1
+		}
+		if c.Direction == network.DirOutbound {
+			ci.Direction = 2
+		}
+		if c.Streams != nil {
+			for _, s := range c.Streams {
+				ci.Streams = append(ci.Streams, &pb.SwarmPeerStream{Protocol: s.Protocol})
+			}
+		}
+		peers.Peers = append(peers.Peers, ci)
+	}
+
+	return proto.Marshal(peers)
 }
 
 // DataAtPath is the async version of dataAtPath

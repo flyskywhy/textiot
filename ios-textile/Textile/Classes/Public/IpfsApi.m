@@ -20,6 +20,14 @@
   return [result length] > 0;
 }
 
+- (SwarmPeerList *)swarmPeers:(BOOL)verbose latency:(BOOL)latency streams:(BOOL)streams direction:(BOOL)direction error:(NSError * _Nullable __autoreleasing *)error {
+  NSData *data = [self.node swarmPeers:verbose latency:latency streams:streams direction:direction error:error];
+  if (*error) {
+    return nil;
+  }
+  return [[SwarmPeerList alloc] initWithData:data error:error];
+}
+
 - (void)dataAtPath:(NSString *)path completion:(void (^)(NSData * _Nullable, NSString * _Nullable, NSError * _Nonnull))completion {
   DataCallback *cb = [[DataCallback alloc] initWithCompletion:^(NSData *data, NSString *media, NSError *error) {
     if (error) {

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Textile. All rights reserved.
 //
 
+#import <TextileCore/Model.pbobjc.h>
 #import "NodeDependant.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,6 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Whether the peer swarm connect was successfull
  */
 - (BOOL)swarmConnect:(NSString *)multiaddr error:(NSError **)error;
+
+/**
+ * Lists the set of peers to which this node is connected
+ * @param verbose Display all extra information
+ * @param latency Also list information about latency to each peer
+ * @param streams Also list information about open streams for each peer
+ * @param direction Also list information about the direction of connection
+ * @param error A reference to an error pointer that will be set in the case of an error
+ * @return An object containing a list of peers
+ */
+- (SwarmPeerList *)swarmPeers:(BOOL)verbose latency:(BOOL)latency streams:(BOOL)streams direction:(BOOL)direction error:(NSError **)error;
 
 /**
  * Get raw data stored at an IPFS path

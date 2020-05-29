@@ -6,6 +6,25 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 import "message.proto";
 
+// SWARM PEERS //
+
+message SwarmPeerStream {
+    string protocol = 1;
+}
+
+message SwarmPeer {
+    string addr                      = 1;
+    string peer                      = 2;
+    string latency                   = 3;
+    string muxer                     = 4;
+    int32 direction                  = 5;
+    repeated SwarmPeerStream streams = 6;
+}
+
+message SwarmPeerList {
+    repeated SwarmPeer peers = 1;
+}
+
 // PEERS //
 
 message Peer {

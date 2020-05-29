@@ -1,5 +1,6 @@
 package io.textile.textile;
 
+import io.textile.pb.Model.SwarmPeerList;
 import mobile.Mobile_;
 
 /**
@@ -29,6 +30,21 @@ public class Ipfs extends NodeDependent {
     public Boolean swarmConnect(final String multiaddr) throws Exception {
         final String result = node.swarmConnect(multiaddr);
         return result.length() > 0;
+    }
+
+    /**
+     * Lists the set of peers to which this node is connected
+     * @param verbose Display all extra information
+     * @param latency Also list information about latency to each peer
+     * @param streams Also list information about open streams for each peer
+     * @param direction Also list information about the direction of connection
+     * @param error A reference to an error pointer that will be set in the case of an error
+     * @return An object containing a list of peers
+     * @throws Exception The exception that occurred
+     */
+    public SwarmPeerList swarmPeers(final boolean verbose, final boolean latency, final boolean streams, final boolean direction) throws Exception {
+        final byte[] bytes = node.swarmPeers(verbose, latency, streams, direction);
+        return SwarmPeerList.parseFrom(bytes != null ? bytes : new byte[0]);
     }
 
     /**

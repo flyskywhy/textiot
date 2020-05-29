@@ -1,6 +1,11 @@
 import { NativeModules } from 'react-native'
 import { Buffer } from 'buffer'
 
+import {
+  ISwarmPeerList,
+  SwarmPeerList
+} from './model'
+
 const { IpfsBridge } = NativeModules
 
 /**
@@ -23,6 +28,17 @@ export async function peerId(): Promise<string> {
 export async function connect(multiaddr: string): Promise<boolean> {
   const result = await IpfsBridge.connect(multiaddr)
   return result
+}
+
+/**
+ * Request all Peers to which this node is connected.
+ * ```typescript
+ * Textile.ipfs.peers(verbose, latency, streams, direction);
+ * ```
+ */
+export async function peers(verbose?: boolean, latency?: boolean, streams?: boolean, direction?: boolean): Promise<ISwarmPeerList> {
+  const result = await IpfsBridge.peers(verbose == true, latency == true, streams == true, direction == true)
+  return SwarmPeerList.decode(Buffer.from(result, 'base64'))
 }
 
 /**

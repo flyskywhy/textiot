@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import io.textile.pb.Model;
 import io.textile.textile.Handlers;
 import io.textile.textile.Textile;
 
@@ -53,6 +54,22 @@ public class IpfsBridge extends ReactContextBaseJavaModule {
                 }
                 catch (final Exception e) {
                     promise.reject("connect", e);
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void peers(final boolean verbose, final boolean latency, final boolean streams, final boolean direction, final Promise promise) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final Model.SwarmPeerList list = Textile.instance().ipfs.swarmPeers(verbose, latency, streams, direction);
+                    promise.resolve(Util.encode(list.toByteArray()));
+                }
+                catch (final Exception e) {
+                    promise.reject("peers", e);
                 }
             }
         });
