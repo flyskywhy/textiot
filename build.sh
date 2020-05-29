@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-./build-post-npm.sh
-
 ## android
 ### textile-pb
 (
@@ -18,6 +16,8 @@ set -euo pipefail
     ./gradlew pb:build
     mv pb/build/outputs/aar/pb-release.aar dist/android/pb-androidx.aar
 )
+
+./build-post-npm.sh
 
 ## react-native
 ### js-types
