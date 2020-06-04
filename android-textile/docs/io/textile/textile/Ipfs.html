@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -166,6 +166,15 @@ extends java.lang.Object</pre>
 <div class="block">Open a new direct connection to a peer using an IPFS multiaddr</div>
 </td>
 </tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>io.textile.pb.Model.SwarmPeerList</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../io/textile/textile/Ipfs.html#swarmPeers-boolean-boolean-boolean-boolean-">swarmPeers</a></span>(boolean&nbsp;verbose,
+          boolean&nbsp;latency,
+          boolean&nbsp;streams,
+          boolean&nbsp;direction)</code>
+<div class="block">Lists the set of peers to which this node is connected</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -219,6 +228,31 @@ extends java.lang.Object</pre>
 <dd><code>multiaddr</code> - Peer IPFS multiaddr</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Whether the peer swarm connect was successfull</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Exception</code> - The exception that occurred</dd>
+</dl>
+</li>
+</ul>
+<a name="swarmPeers-boolean-boolean-boolean-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>swarmPeers</h4>
+<pre>public&nbsp;io.textile.pb.Model.SwarmPeerList&nbsp;swarmPeers(boolean&nbsp;verbose,
+                                                    boolean&nbsp;latency,
+                                                    boolean&nbsp;streams,
+                                                    boolean&nbsp;direction)
+                                             throws java.lang.Exception</pre>
+<div class="block">Lists the set of peers to which this node is connected</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>verbose</code> - Display all extra information</dd>
+<dd><code>latency</code> - Also list information about latency to each peer</dd>
+<dd><code>streams</code> - Also list information about open streams for each peer</dd>
+<dd><code>direction</code> - Also list information about the direction of connection</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>An object containing a list of peers</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.Exception</code> - The exception that occurred</dd>
 </dl>
@@ -284,14 +318,11 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>cancelPubsubSub</h4>
-<pre>public&nbsp;void&nbsp;cancelPubsubSub(java.lang.String&nbsp;queryId)
-                     throws java.lang.Exception</pre>
+<pre>public&nbsp;void&nbsp;cancelPubsubSub(java.lang.String&nbsp;queryId)</pre>
 <div class="block">Cancel subscribe to messages on a given topic</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>queryId</code> - The query ID that can be used to cancel the sub</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.Exception</code> - The exception that occurred</dd>
 </dl>
 </li>
 </ul>

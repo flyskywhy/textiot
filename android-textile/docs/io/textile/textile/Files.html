@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -154,6 +154,12 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>io.textile.pb.View.Files</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../io/textile/textile/Files.html#file-java.lang.String-">file</a></span>(java.lang.String&nbsp;blockId)</code>
+<div class="block">Get a list of files data from a thread</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../io/textile/textile/Files.html#imageContentForMinWidth-java.lang.String-long-io.textile.textile.Handlers.DataHandler-">imageContentForMinWidth</a></span>(java.lang.String&nbsp;path,
                        long&nbsp;minWidth,
@@ -161,7 +167,7 @@ extends java.lang.Object</pre>
 <div class="block">Helper function to return the most appropriate image data for a minimun image width</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>io.textile.pb.View.FilesList</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../io/textile/textile/Files.html#list-java.lang.String-java.lang.String-long-">list</a></span>(java.lang.String&nbsp;threadId,
     java.lang.String&nbsp;offset,
@@ -169,7 +175,7 @@ extends java.lang.Object</pre>
 <div class="block">Get a list of files data from a thread</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../io/textile/textile/Files.html#shareFiles-java.lang.String-java.lang.String-java.lang.String-io.textile.textile.Handlers.BlockHandler-">shareFiles</a></span>(java.lang.String&nbsp;hash,
           java.lang.String&nbsp;threadId,
@@ -257,6 +263,25 @@ extends java.lang.Object</pre>
 <dd><code>threadId</code> - The thread id the data will be added to</dd>
 <dd><code>caption</code> - A caption for the shared input</dd>
 <dd><code>handler</code> - An object that will get called with the resulting block</dd>
+</dl>
+</li>
+</ul>
+<a name="file-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>file</h4>
+<pre>public&nbsp;io.textile.pb.View.Files&nbsp;file(java.lang.String&nbsp;blockId)
+                              throws java.lang.Exception</pre>
+<div class="block">Get a list of files data from a thread</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>blockId</code> - The block id of the File to get</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The Files object corresponding to the specified block id</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Exception</code> - The exception that occurred</dd>
 </dl>
 </li>
 </ul>

@@ -38,7 +38,6 @@ public class Ipfs extends NodeDependent {
      * @param latency Also list information about latency to each peer
      * @param streams Also list information about open streams for each peer
      * @param direction Also list information about the direction of connection
-     * @param error A reference to an error pointer that will be set in the case of an error
      * @return An object containing a list of peers
      * @throws Exception The exception that occurred
      */
