@@ -14,7 +14,7 @@ import io.textile.textile.Textile;
 
 public class IpfsBridge extends ReactContextBaseJavaModule {
 
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private Executor executor = Executors.newCachedThreadPool();
 
     public IpfsBridge(ReactApplicationContext reactContext) {
         super(reactContext);
