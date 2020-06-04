@@ -1,7 +1,8 @@
 basePath: /api/v0
 definitions:
   api.SubsystemInfo:
-    additionalProperties: {}
+    additionalProperties:
+      type: string
     type: object
   ipfs.ConnInfos:
     properties:
@@ -163,6 +164,8 @@ definitions:
   pb.Directory:
     properties:
       files:
+        additionalProperties:
+          $ref: '#/definitions/pb.FileIndex'
         type: object
     type: object
   pb.DirectoryList:
@@ -209,6 +212,8 @@ definitions:
       index:
         type: integer
       links:
+        additionalProperties:
+          $ref: '#/definitions/pb.FileIndex'
         type: object
     type: object
   pb.FileIndex:
@@ -301,6 +306,8 @@ definitions:
   pb.Keys:
     properties:
       files:
+        additionalProperties:
+          type: string
         type: object
     type: object
   pb.Like:
@@ -323,17 +330,38 @@ definitions:
           $ref: '#/definitions/pb.Like'
         type: array
     type: object
+  pb.Link:
+    properties:
+      json_schema:
+        type: string
+      mill:
+        type: string
+      opts:
+        additionalProperties:
+          type: string
+        type: object
+      pin:
+        type: boolean
+      plaintext:
+        type: boolean
+      use:
+        type: string
+    type: object
   pb.Node:
     properties:
       json_schema:
         type: string
       links:
+        additionalProperties:
+          $ref: '#/definitions/pb.Link'
         type: object
       mill:
         type: string
       name:
         type: string
       opts:
+        additionalProperties:
+          type: string
         type: object
       pin:
         type: boolean
@@ -1041,7 +1069,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/mill.Json'
-          type: object
       responses:
         "204":
           description: No Content
@@ -1068,7 +1095,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/mill.Json'
-          type: object
       responses:
         "204":
           description: No Content
@@ -1189,7 +1215,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/pb.Contact'
-          type: object
       responses:
         "204":
           description: ok
@@ -1898,7 +1923,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/pb.Node'
-          type: object
       produces:
       - application/json
       responses:
@@ -2286,7 +2310,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/pb.Thread'
-          type: object
       responses:
         "204":
           description: ok
@@ -2314,7 +2337,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/pb.DirectoryList'
-          type: object
       - default: caption=
         description: 'caption: Caption to add to file(s)'
         in: header

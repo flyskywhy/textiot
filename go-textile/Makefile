@@ -56,7 +56,7 @@ protos:
 .PHONY: docs
 docs:
 	go get github.com/swaggo/swag/cmd/swag
-	swag init -g api/api.go -o api/docs
+	swag init --generalInfo=api/api.go --output=api/docs
 	npm i -g swagger-markdown
 	swagger-markdown -i api/docs/swagger.yaml -o api/docs/swagger.md
 

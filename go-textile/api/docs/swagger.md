@@ -2020,6 +2020,17 @@ Check validity of existing cafe access token
 | ---- | ---- | ----------- | -------- |
 | items | [ [pb.Like](#pb.like) ] |  | No |
 
+#### pb.Link
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| json_schema | string |  | No |
+| mill | string |  | No |
+| opts | object |  | No |
+| pin | boolean |  | No |
+| plaintext | boolean |  | No |
+| use | string |  | No |
+
 #### pb.Node
 
 | Name | Type | Description | Required |

@@ -48,7 +48,7 @@ require (
 	github.com/segmentio/ksuid v1.0.2
 	github.com/stretchr/testify v1.4.0
 	github.com/swaggo/gin-swagger v1.2.0
-	github.com/swaggo/swag v1.6.3
+	github.com/swaggo/swag v1.6.6
 	github.com/textileio/go-textile-bots v0.0.0-20191016222050-575b11f5dfd2
 	github.com/textileio/go-textile-core v0.0.0-20191016220101-ae46e632fcf0
 	github.com/tyler-smith/go-bip39 v1.0.0
