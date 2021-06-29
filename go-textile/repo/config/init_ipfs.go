@@ -37,19 +37,19 @@ var DefaultServerFilters = []string{
 
 // DefaultBootstrapAddresses are the addresses of cafe nodes run by the Textile team.
 var DefaultBootstrapAddresses = []string{
-	"/ip4/104.210.43.77/tcp/4001/ipfs/12D3KooWSdGmRz5JQidqrtmiPGVHkStXpbSAMnbCcW8abq6zuiDP",  // us-west
-	"/ip4/20.39.232.27/tcp/4001/ipfs/12D3KooWLnUv9MWuRM6uHirRPBM4NwRj54n4gNNnBtiFiwPiv3Up",   // eu-west
-	"/ip4/34.87.103.105/tcp/4001/ipfs/12D3KooWA5z2C3z1PNKi36Bw1MxZhBD8nv7UbB7YQP6WcSWYNwRQ",  // as-southeast
-	"/ip4/18.144.12.135/tcp/4001/ipfs/12D3KooWGBW3LfzypK3zgV4QxdPyUm3aEuwBDMKRRpCPm9FrJvar",  // us-west-1a
-	"/ip4/13.57.23.210/tcp/4001/ipfs/12D3KooWQue2dSRqnZTVvikoxorZQ5Qyyug3hV65rYnWYpYsNMRE",   // us-west-1c
-	"/ip4/13.56.163.77/tcp/4001/ipfs/12D3KooWFrrmGJcQhE5h6VUvUEXdLH7gPKdWh2q4CEM62rFGcFpr",   // us-west-beta
-	"/ip4/52.53.127.155/tcp/4001/ipfs/12D3KooWGN8VAsPHsHeJtoTbbzsGjs2LTmQZ6wFKvuPich1TYmYY",  // us-west-dev
-	"/ip4/18.221.167.133/tcp/4001/ipfs/12D3KooWERmHT6g4YkrPBTmhfDLjfi8b662vFCfvBXqzcdkPGQn1", // us-east-2a
-	"/ip4/18.224.173.65/tcp/4001/ipfs/12D3KooWLh9Gd4C3knv4XqCyCuaNddfEoSLXgekVJzRyC5vsjv5d",  // us-east-2b
-	"/ip4/35.180.16.103/tcp/4001/ipfs/12D3KooWDhSfXZCBVAK6SNQu7h6mfGCBJtjMS44PW5YA5YCjVmjB",  // eu-west-3a
-	"/ip4/35.180.35.45/tcp/4001/ipfs/12D3KooWBCZEDkZ2VxdNYKLLUACWbXMvW9SpVbbvoFR9CtH4qJv9",   // eu-west-3b
-	"/ip4/13.250.53.27/tcp/4001/ipfs/12D3KooWQ5MR9Ugz9HkVU3fYFbiWbQR4jxKJB66JoSY7nP5ShsqQ",   // ap-southeast-1a
-	"/ip4/3.1.49.130/tcp/4001/ipfs/12D3KooWDWJ473M3fXMEcajbaGtqgr6i6SvDdh5Ru9i5ZzoJ9Qy8",     // ap-southeast-1b
+	"/ip4/104.210.43.77/tcp/4001/p2p/12D3KooWSdGmRz5JQidqrtmiPGVHkStXpbSAMnbCcW8abq6zuiDP",  // us-west
+	"/ip4/20.39.232.27/tcp/4001/p2p/12D3KooWLnUv9MWuRM6uHirRPBM4NwRj54n4gNNnBtiFiwPiv3Up",   // eu-west
+	"/ip4/34.87.103.105/tcp/4001/p2p/12D3KooWA5z2C3z1PNKi36Bw1MxZhBD8nv7UbB7YQP6WcSWYNwRQ",  // as-southeast
+	"/ip4/18.144.12.135/tcp/4001/p2p/12D3KooWGBW3LfzypK3zgV4QxdPyUm3aEuwBDMKRRpCPm9FrJvar",  // us-west-1a
+	"/ip4/13.57.23.210/tcp/4001/p2p/12D3KooWQue2dSRqnZTVvikoxorZQ5Qyyug3hV65rYnWYpYsNMRE",   // us-west-1c
+	"/ip4/13.56.163.77/tcp/4001/p2p/12D3KooWFrrmGJcQhE5h6VUvUEXdLH7gPKdWh2q4CEM62rFGcFpr",   // us-west-beta
+	"/ip4/52.53.127.155/tcp/4001/p2p/12D3KooWGN8VAsPHsHeJtoTbbzsGjs2LTmQZ6wFKvuPich1TYmYY",  // us-west-dev
+	"/ip4/18.221.167.133/tcp/4001/p2p/12D3KooWERmHT6g4YkrPBTmhfDLjfi8b662vFCfvBXqzcdkPGQn1", // us-east-2a
+	"/ip4/18.224.173.65/tcp/4001/p2p/12D3KooWLh9Gd4C3knv4XqCyCuaNddfEoSLXgekVJzRyC5vsjv5d",  // us-east-2b
+	"/ip4/35.180.16.103/tcp/4001/p2p/12D3KooWDhSfXZCBVAK6SNQu7h6mfGCBJtjMS44PW5YA5YCjVmjB",  // eu-west-3a
+	"/ip4/35.180.35.45/tcp/4001/p2p/12D3KooWBCZEDkZ2VxdNYKLLUACWbXMvW9SpVbbvoFR9CtH4qJv9",   // eu-west-3b
+	"/ip4/13.250.53.27/tcp/4001/p2p/12D3KooWQ5MR9Ugz9HkVU3fYFbiWbQR4jxKJB66JoSY7nP5ShsqQ",   // ap-southeast-1a
+	"/ip4/3.1.49.130/tcp/4001/p2p/12D3KooWDWJ473M3fXMEcajbaGtqgr6i6SvDdh5Ru9i5ZzoJ9Qy8",     // ap-southeast-1b
 }
 
 // TextileBootstrapPeers returns the (parsed) set of Textile bootstrap peers.

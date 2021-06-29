@@ -576,7 +576,7 @@ There are two types of invites, direct account-to-account and external:
 
 	// ipfs swarm connect
 	ipfsSwarmConnectCmd := ipfsSwarmCmd.Command("connect", `Opens a new direct connection to a peer address`)
-	ipfsSwarmConnectAddress := ipfsSwarmConnectCmd.Arg("address", `An IPFS multiaddr, such as: /ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ`).String()
+	ipfsSwarmConnectAddress := ipfsSwarmConnectCmd.Arg("address", `An IPFS multiaddr, such as: /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ`).String()
 	cmds[ipfsSwarmConnectCmd.FullCommand()] = func() error {
 		return IpfsSwarmConnect(*ipfsSwarmConnectAddress)
 	}
