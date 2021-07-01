@@ -78,32 +78,32 @@ func applyTextileConfigOptions(init InitConfig) error {
 	return config.Write(repo, conf)
 }
 
-// applySwarmPortConfigOption sets custom swarm ports (tcp and ws)
+// applySwarmPortConfigOption sets custom swarm ports (tcp and quic)
 func applySwarmPortConfigOption(rep repo.Repo, ports string) error {
 	var parts []string
 	if ports != "" {
 		parts = strings.Split(ports, ",")
 	}
-	var tcp, ws string
+	var tcp, quic string
 
 	switch len(parts) {
 	case 1:
 		tcp = parts[0]
 	case 2:
 		tcp = parts[0]
-		ws = parts[1]
+		quic = parts[1]
 	default:
 		tcp = GetRandomPort()
-		ws = GetRandomPort()
+		quic = GetRandomPort()
 	}
 
 	list := []string{
 		fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", tcp),
 		fmt.Sprintf("/ip6/::/tcp/%s", tcp),
 	}
-	if ws != "" {
-		list = append(list, fmt.Sprintf("/ip4/0.0.0.0/tcp/%s/ws", ws))
-		list = append(list, fmt.Sprintf("/ip6/::/tcp/%s/ws", ws))
+	if quic != "" {
+		list = append(list, fmt.Sprintf("/ip4/0.0.0.0/udp/%s/quic", quic))
+		list = append(list, fmt.Sprintf("/ip6/::/udp/%s/quic", quic))
 	}
 
 	return rep.SetConfigKey("Addresses.Swarm", list)
@@ -170,12 +170,10 @@ func ensureProfile(profile profile, repoPath string) error {
 		conf.Swarm.DisableNatPortMap = true
 		conf.Swarm.EnableRelayHop = true
 		conf.Swarm.EnableAutoRelay = false
-		conf.Swarm.EnableAutoNATService = true
 	} else {
 		conf.Swarm.DisableNatPortMap = false
 		conf.Swarm.EnableRelayHop = false
 		conf.Swarm.EnableAutoRelay = true
-		conf.Swarm.EnableAutoNATService = false
 	}
 	conf.Swarm.DisableRelay = false
 

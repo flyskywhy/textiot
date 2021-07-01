@@ -7,21 +7,23 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/libp2p/go-libp2p-core/helpers"
 	inet "github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-msgio"
 	"github.com/textileio/go-textile/pb"
 )
 
-func (srv *Service) updateFromMessage(ctx context.Context, p peer.ID) error {
-	// Make sure that this node is actually a DHT server, not just a client.
-	protos, err := srv.Node().Peerstore.SupportsProtocols(p, string(srv.handler.Protocol()))
-	if err == nil && len(protos) > 0 {
-		srv.Node().DHT.Update(ctx, p)
-	}
-	return nil
-}
+// the first version of this file ref to go-libp2p-kad-dht@0.0.13
+
+// comment below because https://github.com/libp2p/go-libp2p-kad-dht/pull/472/commits/55549562e32e60a41a7c2fb363307938e15fc4db
+// func (srv *Service) updateFromMessage(ctx context.Context, p peer.ID) error {
+// 	// Make sure that this node is actually a DHT server, not just a client.
+// 	protos, err := srv.Node().Peerstore.SupportsProtocols(p, string(srv.handler.Protocol()))
+// 	if err == nil && len(protos) > 0 {
+// 		srv.Node().DHT.Update(ctx, p)
+// 	}
+// 	return nil
+// }
 
 func (srv *Service) messageSenderForPeer(ctx context.Context, p peer.ID) (*messageSender, error) {
 	srv.smlk.Lock()
@@ -135,7 +137,7 @@ func (ms *messageSender) SendMessage(ctx context.Context, pmes *pb.Envelope) err
 		}
 
 		if ms.singleMes > streamReuseTries {
-			go helpers.FullClose(ms.s)
+			go ms.s.Close()
 			ms.s = nil
 		} else if retry {
 			ms.singleMes++
@@ -182,7 +184,7 @@ func (ms *messageSender) SendRequest(ctx context.Context, pmes *pb.Envelope) (*p
 		}
 
 		if ms.singleMes > streamReuseTries {
-			go helpers.FullClose(ms.s)
+			go ms.s.Close()
 			ms.s = nil
 		} else if retry {
 			ms.singleMes++

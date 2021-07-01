@@ -12,7 +12,8 @@ import (
 	files "github.com/ipfs/go-ipfs-files"
 	"github.com/ipfs/go-ipfs/core"
 	"github.com/ipfs/go-ipfs/core/coreapi"
-	"github.com/ipfs/go-ipfs/pin"
+	ipfspinner "github.com/ipfs/go-ipfs-pinner"
+	pin "github.com/ipfs/go-ipfs-pinner/dspinner"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log"
 	dag "github.com/ipfs/go-merkledag"
@@ -305,7 +306,7 @@ func PinNode(node *core.IpfsNode, nd ipld.Node, recursive bool) error {
 		return err
 	}
 
-	return node.Pinning.Flush()
+	return node.Pinning.Flush(node.Context())
 }
 
 // UnpinNode unpins an ipld node
@@ -323,7 +324,7 @@ func UnpinCid(node *core.IpfsNode, id icid.Cid, recursive bool) error {
 		return err
 	}
 
-	return node.Pinning.Flush()
+	return node.Pinning.Flush(node.Context())
 }
 
 // Pinned returns the subset of given cids that are pinned
@@ -336,14 +337,14 @@ func Pinned(node *core.IpfsNode, cids []string) ([]icid.Cid, error) {
 		}
 		decoded = append(decoded, dec)
 	}
-	list, err := node.Pinning.CheckIfPinned(decoded...)
+	list, err := node.Pinning.CheckIfPinned(node.Context(), decoded...)
 	if err != nil {
 		return nil, err
 	}
 
 	var pinned []icid.Cid
 	for _, p := range list {
-		if p.Mode != pin.NotPinned {
+		if p.Mode != ipfspinner.NotPinned {
 			pinned = append(pinned, p.Key)
 		}
 	}
@@ -361,14 +362,14 @@ func NotPinned(node *core.IpfsNode, cids []string) ([]icid.Cid, error) {
 		}
 		decoded = append(decoded, dec)
 	}
-	list, err := node.Pinning.CheckIfPinned(decoded...)
+	list, err := node.Pinning.CheckIfPinned(node.Context(), decoded...)
 	if err != nil {
 		return nil, err
 	}
 
 	var notPinned []icid.Cid
 	for _, p := range list {
-		if p.Mode == pin.NotPinned {
+		if p.Mode == ipfspinner.NotPinned {
 			notPinned = append(notPinned, p.Key)
 		}
 	}

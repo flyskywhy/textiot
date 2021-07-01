@@ -131,11 +131,12 @@ func InitIpfs(identity native.Identity, mobile bool, server bool) (*native.Confi
 		Gateway: native.Gateway{
 			RootRedirect: "",
 			Writable:     false,
+			NoFetch:      false,
 			PathPrefixes: []string{},
 			HTTPHeaders: map[string][]string{
 				"Access-Control-Allow-Origin":  {"*"},
 				"Access-Control-Allow-Methods": {"GET"},
-				"Access-Control-Allow-Headers": {"X-Requested-With", "Range"},
+				"Access-Control-Allow-Headers": {"X-Requested-With", "Range", "User-Agent"},
 			},
 			APICommands: []string{},
 		},
@@ -156,7 +157,6 @@ func InitIpfs(identity native.Identity, mobile bool, server bool) (*native.Confi
 			DisableRelay:            false,
 			EnableRelayHop:          server,
 			EnableAutoRelay:         !server,
-			EnableAutoNATService:    server,
 		},
 		Experimental: native.Experiments{
 			FilestoreEnabled:     false,

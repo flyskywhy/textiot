@@ -1006,6 +1006,16 @@ func (t *Textile) runConditionalGC() {
 	}
 }
 
+var ansiGray = "\033[0;37m"
+var ansiBlue = "\033[0;34m"
+
+// LogFormats defines formats for logging (i.e. "color")
+var LogFormats = map[string]string{
+	"nocolor": "%{time:2006-01-02 15:04:05.000000} %{level} %{module} %{shortfile}: %{message}",
+	"color": ansiGray + "%{time:15:04:05.000} %{color}%{level:5.5s} " + ansiBlue +
+		"%{module:10.10s}: %{color:reset}%{message} " + ansiGray + "%{shortfile}%{color:reset}",
+}
+
 // setLogLevels hijacks the ipfs logging system, putting output to files
 func setLogLevels(repoPath string, level *pb.LogLevel, disk bool, color bool) (io.Writer, error) {
 	var writer io.Writer
@@ -1024,12 +1034,12 @@ func setLogLevels(repoPath string, level *pb.LogLevel, disk bool, color bool) (i
 
 	var format string
 	if color {
-		format = logging.LogFormats["color"]
+		format = LogFormats["color"]
 	} else {
-		format = logging.LogFormats["nocolor"]
+		format = LogFormats["nocolor"]
 	}
 	logger.SetFormatter(logger.MustStringFormatter(format))
-	logging.SetAllLoggers(logger.ERROR)
+	logging.SetAllLoggers(logging.LevelError)
 
 	var err error
 	for key, value := range level.Systems {

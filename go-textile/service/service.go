@@ -119,8 +119,6 @@ func (srv *Service) SendRequest(p string, pmes *pb.Envelope) (*pb.Envelope, erro
 		return nil, err
 	}
 
-	_ = srv.updateFromMessage(ctx, pid)
-
 	if rpmes == nil {
 		err = fmt.Errorf("no response from %s", p)
 		log.Debug(err.Error())
@@ -386,8 +384,6 @@ func (srv *Service) handleNewStream(s inet.Stream) {
 }
 
 func (srv *Service) handleNewMessage(s inet.Stream) bool {
-	ctx := srv.Node().Context()
-
 	r := msgio.NewVarintReaderSize(s, inet.MessageSizeMax)
 
 	mPeer := s.Conn().RemotePeer()
@@ -436,11 +432,6 @@ func (srv *Service) handleNewMessage(s inet.Stream) bool {
 		if err != nil {
 			log.Warningf("error handling message %s: %s", req.Message.Type.String(), err)
 			return false
-		}
-
-		err = srv.updateFromMessage(ctx, mPeer)
-		if err != nil {
-			log.Warningf("error updating from: %s", err)
 		}
 
 		if rpmes == nil {

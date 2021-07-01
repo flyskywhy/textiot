@@ -53,7 +53,7 @@ COPY --from=0 /lib/x86_64-linux-gnu/libdl-2.24.so /lib/libdl.so.2
 
 # Swarm TCP; should be exposed to the public
 EXPOSE 4001
-# Swarm Websockets; must be exposed publicly when the node is listening using the websocket transport (/ipX/.../tcp/8081/ws).
+# Swarm QUIC; must be exposed publicly when the node is listening using the quic transport (/ipX/.../udp/8081/quic).
 EXPOSE 8081
 # Daemon API; must not be exposed publicly but to client services under you control
 EXPOSE 40600
