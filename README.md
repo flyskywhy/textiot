@@ -13,7 +13,7 @@ For RN < 0.60, run `react-native link textiot`.
 For RN < 0.60 or >= 0.60, then:
 
 #### Android
-Add bellow into `android/settings.gradle`
+Add below into `android/settings.gradle`
 
 androidx not android:
 ```
@@ -39,7 +39,7 @@ and `cd node_modules/textiot; ./androidx2android.sh`
 
     require('textiot/react-native-sdk').default;
 
-Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
+Because can not `npm publish` full 300MB package, so you have to install tools described below and
 
     cd node_modules/textiot/
     ./build-post-npm.sh
@@ -55,7 +55,7 @@ react-native-sdk/textile-android
 ```
 
 #### iOS
-Because can not `npm publish` full 300MB package, so you have to install tools described bellow and
+Because can not `npm publish` full 300MB package, so you have to install tools described below and
 
     cd node_modules/textiot/
     ./build-mac.sh
@@ -67,7 +67,7 @@ go-textile/mobile/dist/ios/Mobile.framework/
 go-textile/mobile/dist/ios/protos/
 ```
 
-Add bellow (after `pod 'Folly'`) into `ios/Podfile`
+Add below (after `pod 'Folly'`) into `ios/Podfile`
 ```
   pod 'Textile', :path => '../node_modules/textiot/ios-textile'
   pod 'TextileCore', :path => '../node_modules/textiot/go-textile/mobile/dist/ios'
@@ -141,6 +141,35 @@ If you modify `go-textile/pb/protos/*.proto`, then you also need regenerate `go-
     git checkout 7e65e51
     go build
     mv protoc-gen-go ~/go/bin/
+
+or just
+
+    go install github.com/golang/protobuf/protoc-gen-go@7e65e51
+
+regenerate:
+
+    cd go-textile
+    make protos
+
+#### google.golang.org/protobuf v1.26.1-0.20210525005349-febffdd88e85
+There is exact version
+
+    google.golang.org/protobuf v1.26.1-0.20210525005349-febffdd88e85
+
+in `go.mod`, if miss it or even a bigger version e.g.
+
+    google.golang.org/protobuf v1.27.0
+
+will cause `panic: proto: file "message.proto" is already registered` when run `./textile`, ref to [proto: file is already registered with different packages](https://stackoverflow.com/questions/67693170/proto-file-is-already-registered-with-different-packages) and [reflect/protoregistry: restore conflicting file names check](https://github.com/protocolbuffers/protobuf-go/commit/21e33cc91079beb975323466e237f2486ea29c10).
+
+Maybe can use `protoc-gen-go` with the same version with `go.mod`, because the key to resolve the panic is should only about `go.mod` not about the `protoc-gen-go`, to be validate.
+
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@febffdd
+
+If can't install above for network reason, install below is also ok
+
+    cd ~/go/pkg/mod/google.golang.org/protobuf@v1.26.1-0.20210525005349-febffdd88e85/cmd/protoc-gen-go/
+    go build -o ~/go/bin
 
 regenerate:
 
