@@ -7,7 +7,7 @@
 //
 
 #import "FeedApi.h"
-#import "util.h"
+#import "../util.h"
 
 @implementation FeedApi
 

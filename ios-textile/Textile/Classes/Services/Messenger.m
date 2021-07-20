@@ -6,11 +6,11 @@
 //  Copyright © 2019 Textile. All rights reserved.
 //
 
-#import "Messenger.h"
+#import "./Messenger.h"
 #import <TextileCore/Mobile.pbobjc.h>
 #import <TextileCore/Query.pbobjc.h>
 #import <TextileCore/Message.pbobjc.h>
-#import "util.h"
+#import "../util.h"
 
 @interface Messenger ()
 

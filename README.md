@@ -91,9 +91,7 @@ Add below (after `pod 'Folly'`) into `ios/Podfile`
 ## Develop
 ### Install tools
 
-#### golang >= 1.13.10
-Before go1.13.1, iPhone App Store submission fails with non-public symbols `_ptrace` as described in https://github.com/golang/go/issues/31628 . I have not test go1.13.10 or go1.14 on App Store yet, so maybe you still need to install a hacked https://github.com/textileio/go.git described in https://github.com/textileio/go-textile/blob/master/.circleci/config.yml#L186
-
+#### golang >= 1.14.15
     go get golang.org/x/mobile/cmd/gomobile
     export PATH=~/go/bin:$PATH
     gomobile init
@@ -109,6 +107,9 @@ if `unrecognized import path "golang.org/x/mobile/cmd/gomobile` , then
     cd ~/go/src/github.com/golang
     git clone https://github.com/golang/mobile
     git clone https://github.com/golang/tools
+    git clone https://github.com/golang/mod
+    git clone https://github.com/golang/sys
+    git clone https://github.com/golang/xerrors
     go get golang.org/x/mobile/cmd/gomobile
     gomobile init
 
@@ -143,7 +144,7 @@ Then need change `com.google.protobuf:protobuf-java:3.6.1` to `com.google.protob
 
 Then need change `com.google.protobuf:protobuf-java:3.6.1` to `com.google.protobuf:protobuf-java:3.12.4` in `android-textile/textile/build.gradle` and `android/build.gradle`, otherwise the APP will crash `E AndroidRuntime: java.lang.NoSuchMethodError: No static method internalBuildGeneratedFileFrom([Ljava/lang/String;[Lcom/google/protobuf/Descriptors$FileDescriptor;)Lcom/google/protobuf/Descriptors$FileDescriptor; in class Lcom/google/protobuf/Descriptors$FileDescriptor; or its super classes` when run into `list.toByteArray()` of `final Model.ThreadList list` in `textiot/react-native-sdk/android/src/main/java/io/textile/rnmobile/ThreadsBridge.java`.
 
-All will be built by `build.sh` on Linux except `mobile/dist/ios/protos` and `mobile/dist/ios/Mobile.framework/` by `build-mac.sh` on macOS.
+All will be built by `build.sh` on Linux except `mobile/dist/ios/protos` and `mobile/dist/ios/Mobile.framework/` by `build-mac.sh` on macOS. Similarly, if `protoc --version` return `3.13.0` on macOS, then need change `s.dependency 'Protobuf', '~> 3.7'` to `s.dependency 'Protobuf', '3.13.0'` in `ios-textile/Textile.podspec` and `go-textile/mobile/dist/ios/TextileCore.podspec`.
 
 #### protoc-gen-go 7e65e51
 If you modify `go-textile/pb/protos/*.proto`, then you also need regenerate `go-textile/pb/*.pb.go` by an exact version of protoc-gen-go which match protoc 3.x (or `protoc-gen-go@7e65e51` described below)
