@@ -37,19 +37,39 @@ var DefaultServerFilters = []string{
 
 // DefaultBootstrapAddresses are the addresses of cafe nodes run by the Textile team.
 var DefaultBootstrapAddresses = []string{
-	"/ip4/104.210.43.77/tcp/4001/p2p/12D3KooWSdGmRz5JQidqrtmiPGVHkStXpbSAMnbCcW8abq6zuiDP",  // us-west
-	"/ip4/20.39.232.27/tcp/4001/p2p/12D3KooWLnUv9MWuRM6uHirRPBM4NwRj54n4gNNnBtiFiwPiv3Up",   // eu-west
+	// ref to https://github.com/textileio/powergate/blob/master/fchost/config.go
+	"/dns4/bootstrap-0.starpool.in/tcp/12757/p2p/12D3KooWGHpBMeZbestVEWkfdnC9u7p6uFHXL1n7m1ZBqsEmiUzz",
+	"/dns4/bootstrap-1.starpool.in/tcp/12757/p2p/12D3KooWQZrGH1PxSNZPum99M1zNvjNFM33d1AAu5DcvdHptuU7u",
+	"/dns4/bootstrap-0.ipfsmain.cn/tcp/34721/p2p/12D3KooWQnwEGNqcM2nAcPtRR9rAX8Hrg4k9kJLCHoTR5chJfz6d",
+	"/dns4/bootstrap-1.ipfsmain.cn/tcp/34723/p2p/12D3KooWMKxMkD5DMpSWsW7dBddKxKT7L2GgbNuckz9otxvkvByP",
+
+	// ref to https://github.com/textileio/bidbot/blob/main/lib/marketpeer/flags.go
+	"/ip4/34.83.3.108/tcp/4001/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
+	"/ip4/34.83.3.108/udp/4001/quic/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
+	"/ip4/34.105.101.67/tcp/4001/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
+	"/ip4/34.105.101.67/udp/4001/quic/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
+	"/ip4/34.83.36.118/tcp/4001/p2p/12D3KooWQSf4SMyWPSqLN23KxhcLWYhshWb34pYv65cr85jGpNrR",
+	"/ip4/34.82.221.249/tcp/4001/p2p/12D3KooWBGyJbDmjjvEzfsgb3nE9JsfcYRqPxpnQagxbb1PyxBrb",
+	"/ip4/34.83.88.62/tcp/4001/p2p/12D3KooWHpxr8BTd3R6kAqvtfn77PKW7WRqJ4cbnrT59K2rU44WM",
+
+	// ref to https://blog.ipfs.io/2021-06-10-guide-to-ipfs-connectivity-in-browsers/
+	"/dns6/ipfs.thedisco.zone/tcp/4430/wss/p2p/12D3KooWChhhfGdB9GJy1GbhghAAKCUR99oCymMEVS4eUcEy67nt",
+	"/dns4/ipfs.thedisco.zone/tcp/4430/wss/p2p/12D3KooWChhhfGdB9GJy1GbhghAAKCUR99oCymMEVS4eUcEy67nt",
+
+	// ref to https://github.com/textileio/go-textile/blob/master/repo/config/init_ipfs.go
+	// "/ip4/104.210.43.77/tcp/4001/p2p/12D3KooWSdGmRz5JQidqrtmiPGVHkStXpbSAMnbCcW8abq6zuiDP",  // us-west
+	// "/ip4/20.39.232.27/tcp/4001/p2p/12D3KooWLnUv9MWuRM6uHirRPBM4NwRj54n4gNNnBtiFiwPiv3Up",   // eu-west
 	"/ip4/34.87.103.105/tcp/4001/p2p/12D3KooWA5z2C3z1PNKi36Bw1MxZhBD8nv7UbB7YQP6WcSWYNwRQ",  // as-southeast
 	"/ip4/18.144.12.135/tcp/4001/p2p/12D3KooWGBW3LfzypK3zgV4QxdPyUm3aEuwBDMKRRpCPm9FrJvar",  // us-west-1a
 	"/ip4/13.57.23.210/tcp/4001/p2p/12D3KooWQue2dSRqnZTVvikoxorZQ5Qyyug3hV65rYnWYpYsNMRE",   // us-west-1c
-	"/ip4/13.56.163.77/tcp/4001/p2p/12D3KooWFrrmGJcQhE5h6VUvUEXdLH7gPKdWh2q4CEM62rFGcFpr",   // us-west-beta
-	"/ip4/52.53.127.155/tcp/4001/p2p/12D3KooWGN8VAsPHsHeJtoTbbzsGjs2LTmQZ6wFKvuPich1TYmYY",  // us-west-dev
-	"/ip4/18.221.167.133/tcp/4001/p2p/12D3KooWERmHT6g4YkrPBTmhfDLjfi8b662vFCfvBXqzcdkPGQn1", // us-east-2a
-	"/ip4/18.224.173.65/tcp/4001/p2p/12D3KooWLh9Gd4C3knv4XqCyCuaNddfEoSLXgekVJzRyC5vsjv5d",  // us-east-2b
-	"/ip4/35.180.16.103/tcp/4001/p2p/12D3KooWDhSfXZCBVAK6SNQu7h6mfGCBJtjMS44PW5YA5YCjVmjB",  // eu-west-3a
-	"/ip4/35.180.35.45/tcp/4001/p2p/12D3KooWBCZEDkZ2VxdNYKLLUACWbXMvW9SpVbbvoFR9CtH4qJv9",   // eu-west-3b
-	"/ip4/13.250.53.27/tcp/4001/p2p/12D3KooWQ5MR9Ugz9HkVU3fYFbiWbQR4jxKJB66JoSY7nP5ShsqQ",   // ap-southeast-1a
-	"/ip4/3.1.49.130/tcp/4001/p2p/12D3KooWDWJ473M3fXMEcajbaGtqgr6i6SvDdh5Ru9i5ZzoJ9Qy8",     // ap-southeast-1b
+	// "/ip4/13.56.163.77/tcp/4001/p2p/12D3KooWFrrmGJcQhE5h6VUvUEXdLH7gPKdWh2q4CEM62rFGcFpr",   // us-west-beta
+	// "/ip4/52.53.127.155/tcp/4001/p2p/12D3KooWGN8VAsPHsHeJtoTbbzsGjs2LTmQZ6wFKvuPich1TYmYY",  // us-west-dev
+	// "/ip4/18.221.167.133/tcp/4001/p2p/12D3KooWERmHT6g4YkrPBTmhfDLjfi8b662vFCfvBXqzcdkPGQn1", // us-east-2a
+	// "/ip4/18.224.173.65/tcp/4001/p2p/12D3KooWLh9Gd4C3knv4XqCyCuaNddfEoSLXgekVJzRyC5vsjv5d",  // us-east-2b
+	// "/ip4/35.180.16.103/tcp/4001/p2p/12D3KooWDhSfXZCBVAK6SNQu7h6mfGCBJtjMS44PW5YA5YCjVmjB",  // eu-west-3a
+	// "/ip4/35.180.35.45/tcp/4001/p2p/12D3KooWBCZEDkZ2VxdNYKLLUACWbXMvW9SpVbbvoFR9CtH4qJv9",   // eu-west-3b
+	// "/ip4/13.250.53.27/tcp/4001/p2p/12D3KooWQ5MR9Ugz9HkVU3fYFbiWbQR4jxKJB66JoSY7nP5ShsqQ",   // ap-southeast-1a
+	// "/ip4/3.1.49.130/tcp/4001/p2p/12D3KooWDWJ473M3fXMEcajbaGtqgr6i6SvDdh5Ru9i5ZzoJ9Qy8",     // ap-southeast-1b
 }
 
 // TextileBootstrapPeers returns the (parsed) set of Textile bootstrap peers.
