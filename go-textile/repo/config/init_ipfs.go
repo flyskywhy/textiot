@@ -38,19 +38,21 @@ var DefaultServerFilters = []string{
 // DefaultBootstrapAddresses are the addresses of cafe nodes run by the Textile team.
 var DefaultBootstrapAddresses = []string{
 	// ref to https://github.com/textileio/powergate/blob/master/fchost/config.go
-	"/dns4/bootstrap-0.starpool.in/tcp/12757/p2p/12D3KooWGHpBMeZbestVEWkfdnC9u7p6uFHXL1n7m1ZBqsEmiUzz",
-	"/dns4/bootstrap-1.starpool.in/tcp/12757/p2p/12D3KooWQZrGH1PxSNZPum99M1zNvjNFM33d1AAu5DcvdHptuU7u",
-	"/dns4/bootstrap-0.ipfsmain.cn/tcp/34721/p2p/12D3KooWQnwEGNqcM2nAcPtRR9rAX8Hrg4k9kJLCHoTR5chJfz6d",
-	"/dns4/bootstrap-1.ipfsmain.cn/tcp/34723/p2p/12D3KooWMKxMkD5DMpSWsW7dBddKxKT7L2GgbNuckz9otxvkvByP",
+	// but will cause `failure: routing: not found` when `ipfs swarm connect`, so comment them
+	// "/dns4/bootstrap-0.starpool.in/tcp/12757/p2p/12D3KooWGHpBMeZbestVEWkfdnC9u7p6uFHXL1n7m1ZBqsEmiUzz",
+	// "/dns4/bootstrap-1.starpool.in/tcp/12757/p2p/12D3KooWQZrGH1PxSNZPum99M1zNvjNFM33d1AAu5DcvdHptuU7u",
+	// "/dns4/bootstrap-0.ipfsmain.cn/tcp/34721/p2p/12D3KooWQnwEGNqcM2nAcPtRR9rAX8Hrg4k9kJLCHoTR5chJfz6d",
+	// "/dns4/bootstrap-1.ipfsmain.cn/tcp/34723/p2p/12D3KooWMKxMkD5DMpSWsW7dBddKxKT7L2GgbNuckz9otxvkvByP",
 
 	// ref to https://github.com/textileio/bidbot/blob/main/lib/marketpeer/flags.go
-	"/ip4/34.83.3.108/tcp/4001/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
-	"/ip4/34.83.3.108/udp/4001/quic/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
-	"/ip4/34.105.101.67/tcp/4001/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
-	"/ip4/34.105.101.67/udp/4001/quic/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
-	"/ip4/34.83.36.118/tcp/4001/p2p/12D3KooWQSf4SMyWPSqLN23KxhcLWYhshWb34pYv65cr85jGpNrR",
-	"/ip4/34.82.221.249/tcp/4001/p2p/12D3KooWBGyJbDmjjvEzfsgb3nE9JsfcYRqPxpnQagxbb1PyxBrb",
-	"/ip4/34.83.88.62/tcp/4001/p2p/12D3KooWHpxr8BTd3R6kAqvtfn77PKW7WRqJ4cbnrT59K2rU44WM",
+	// but will cause `failure: routing: not found` when `ipfs swarm connect`, so comment them
+	// "/ip4/34.83.3.108/tcp/4001/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
+	// "/ip4/34.83.3.108/udp/4001/quic/p2p/12D3KooWGDBaVz45c5d9VEtF4eM7Pgj71DSzB3HHAfpjc8fb5EGe",
+	// "/ip4/34.105.101.67/tcp/4001/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
+	// "/ip4/34.105.101.67/udp/4001/quic/p2p/12D3KooW9wsxrkCx6CnsWb1gBxZWAjzVK5Hif9FLXKoQZYLewXoD",
+	// "/ip4/34.83.36.118/tcp/4001/p2p/12D3KooWQSf4SMyWPSqLN23KxhcLWYhshWb34pYv65cr85jGpNrR",
+	// "/ip4/34.82.221.249/tcp/4001/p2p/12D3KooWBGyJbDmjjvEzfsgb3nE9JsfcYRqPxpnQagxbb1PyxBrb",
+	// "/ip4/34.83.88.62/tcp/4001/p2p/12D3KooWHpxr8BTd3R6kAqvtfn77PKW7WRqJ4cbnrT59K2rU44WM",
 
 	// ref to https://blog.ipfs.io/2021-06-10-guide-to-ipfs-connectivity-in-browsers/
 	"/dns6/ipfs.thedisco.zone/tcp/4430/wss/p2p/12D3KooWChhhfGdB9GJy1GbhghAAKCUR99oCymMEVS4eUcEy67nt",
