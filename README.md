@@ -1,7 +1,7 @@
 # textiot
 A framework for building web and native (IoT) Dapps on the IPFS network.
 
-An only one textiot.git was combined with https://github.com/textileio/go-textile and related git repos for easier development.
+An monorepo textiot.git was combined with https://github.com/textileio/go-textile and related git repos for easier development.
 
 ## Usage
 ### react-native
@@ -229,3 +229,12 @@ results:
 ```
 js-http-client/dist/index.js
 ```
+
+## Changelog
+### textiot@2.0.0
+`go-ipfs v0.8.0`
+
+And no ipfs repo migration from `0.4.22` to `0.8.0` support here, so you need migrate with ipfs official migration tool by yourself if you want.
+
+### textiot@1.0.0
+`go-ipfs v0.4.22-0.20191002225611-b15edf287df6`

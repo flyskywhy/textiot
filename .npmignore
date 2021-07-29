@@ -1,3 +1,9 @@
+/android-textile/mobile/build/
+/android-textile/pb-android/build/
+/android-textile/pb-androidx/build/
+/android/build/
+/react-native-sdk/textile-android/build/
+/react-native-sdk/textile-androidx/build/
 /node_modules/
 package-lock.json
 .DS_Store
