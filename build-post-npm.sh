@@ -14,6 +14,11 @@ set -euo pipefail
 ## arm-linux
 (cd go-textile; rm -f textile-arm; make textile-arm)
 
+protocVersion=`protoc --version | sed "s/libprotoc //"`
+sed -i -e "s/com.google.protobuf:protobuf-java:3.6.1/com.google.protobuf:protobuf-java:$protocVersion/" go-textile/release/PBProject/pb/build.gradle
+sed -i -e "s/com.google.protobuf:protobuf-java:3.6.1/com.google.protobuf:protobuf-java:$protocVersion/" android-textile/textile/build.gradle
+sed -i -e "s/com.google.protobuf:protobuf-java:3.6.1/com.google.protobuf:protobuf-java:$protocVersion/" android/build.gradle
+
 ## android
 ### textile-mobile
 (

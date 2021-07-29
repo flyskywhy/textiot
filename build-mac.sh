@@ -8,6 +8,11 @@ set -euo pipefail
 ## x64-macos
 (cd go-textile; rm -f textile-mac; make textile-mac)
 
+protocVersion=`protoc --version | sed "s/libprotoc //"`
+sed -i -e "s/~> 3.7/$protocVersion/" go-textile/mobile/dist/ios/TextileCore.podspec
+sed -i -e "s/~> 3.7/$protocVersion/" ios-textile/Textile.podspec
+
+
 ## ios
 ### textile-mobile
 (
