@@ -42,9 +42,6 @@ repositories {
     maven {
         url "$rootDir/../../react-native/android"
     }
-    maven {
-        url 'https://dl.bintray.com/textile/maven'
-    }
 }
 
 dependencies {
