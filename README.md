@@ -305,11 +305,11 @@ to `node_modules/textiot/go-textile/vendor/` to overwrite relevant file.
 
 In
 
-    type metrics interface
+    type Metrics interface
 
 of `node_modules/textiot/go-textile/vendor/github.com/libp2p/go-libp2p-core/peerstore/peerstore.go` , add
 
-    removepeer(peer.id)
+    RemovePeer(peer.ID)
 
 Finally, run remain in `node_modules/textiot/build-post-npm.sh` .
 
