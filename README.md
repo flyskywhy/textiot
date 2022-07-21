@@ -233,49 +233,75 @@ results:
 js-http-client/dist/index.js
 ```
 
-### echo patching textiot
+## patch
+### patch to avoid crash sometimes on Android
+Fix `node.waitAdd` in `Textile.java` sometimes will crash. The uploadservice used by registerReceiver only needed by Cafe (server) function, and Android APP used in IoT generally does not need Cafe.
 ```
-# 解决该文件中 node.waitAdd 有时会崩溃的问题。这个用于 registerReceiver 的 uploadservice 只在 Cafe 功能中被使用，而我们项目中不需要 Cafe 功能
 sed -i -e "s/^    private static final RequestsBroadcastReceiver/    \/\/ private static final RequestsBroadcastReceiver/" node_modules/textiot/android-textile/textile/src/main/java/io/textile/textile/Textile.java
 sed -i -e "s/^        applicationContext.registerReceiver/        \/\/ applicationContext.registerReceiver/" node_modules/textiot/android-textile/textile/src/main/java/io/textile/textile/Textile.java
+```
+### patch to reduce memory usage
+* Fix too many `swarm peers` connections cause too high memory usage, then may cause mobile APP crash when running in 2GB IoT device.
 
-# 解决 swarm peers 连接数过多导致内存占用过高，从而可能引起 2GB 的网关设备中的 APP 崩溃的问题
-# 这里的数值参考自 https://osm.hpi.de/iot-lab/docs/mpss2020/scaling/scaling-ipfs/
+Numeric value below ref to [https://osm.hpi.de/iot-lab/docs/mpss2020/scaling/scaling-ipfs/](https://osm.hpi.de/iot-lab/docs/mpss2020/scaling/scaling-ipfs/)
+```
 sed -i -e "s/LowWater = 200/LowWater = 40/" node_modules/textiot/go-textile/core/config.go
 sed -i -e "s/HighWater = 500/HighWater = 70\n\t\tconf.Swarm.ConnMgr.GracePeriod = \"60s\"/" node_modules/textiot/go-textile/core/config.go
 sed -i -e "/time.Second/d" node_modules/textiot/go-textile/core/config.go
-
-# 解决 LowWater 和 HighWater 没起作用的 BUG
-# 参考自 https://discuss.ipfs.io/t/number-of-peers-far-exceeds-lowwater-highwater-settings
-# [ipfs daemon memory usage grows overtime: killed by OOM after a 10~12 days running](https://github.com/ipfs/go-ipfs/issues/3532)
-# [Garbage Collect per-peer bandwidth metrics](https://github.com/libp2p/go-libp2p-core/issues/80)
-echo -e "\x1B[31m请在这里做手动处理！！！\x1B[0m"
-echo -e "\x1B[32m在 node_modules/textiot/build-post-npm.sh 中的\x1B[0m"
-echo -e "\x1B[32m    go mod vendor\x1B[0m"
-echo -e "\x1B[32m运行之前，在 node_modules/textiot/go-textile/go.mod 中添加\x1B[0m"
-echo -e "\x1B[32m    github.com/libp2p/go-libp2p-peerstore v0.3.0\x1B[0m"
-echo -e "\x1B[32m然后运行 go mod vendor ，接着\x1B[0m"
-echo -e ""
-echo -e "\x1B[32m复制 https://github.com/flyskywhy/go-libp2p-connmgr 的 ipfs-v0.8.0 分支中的\x1B[0m"
-echo -e "\x1B[32m    connmgr.go\x1B[0m"
-echo -e "\x1B[32m    decay.go\x1B[0m"
-echo -e "\x1B[32m    options.go\x1B[0m"
-echo -e "\x1B[32m到 node_modules/textiot/go-textile/vendor/ 中覆盖相应文件\x1B[0m"
-echo -e ""
-echo -e "\x1B[32m复制 https://github.com/flyskywhy/go-libp2p-peerstore 的 ipfs-v0.8.0 分支中的\x1B[0m"
-echo -e "\x1B[32m    pstoremem/\x1B[0m"
-echo -e "\x1B[32m到 node_modules/textiot/go-textile/vendor/ 中覆盖相应目录\x1B[0m"
-echo -e ""
-echo -e "\x1B[32m复制 https://github.com/flyskywhy/go-libp2p-peerstore 的 ipfs-v0.8.0 分支中的\x1B[0m"
-echo -e "\x1B[32m    metrics.go\x1B[0m"
-echo -e "\x1B[32m到 node_modules/textiot/go-textile/vendor/ 中覆盖相应文件\x1B[0m"
-echo -e ""
-echo -e "\x1B[32m在 node_modules/textiot/go-textile/vendor/github.com/libp2p/go-libp2p-core/peerstore/peerstore.go 中的\x1B[0m"
-echo -e "\x1B[32m    type Metrics interface\x1B[0m"
-echo -e "\x1B[32m中添加 RemovePeer(peer.ID)\x1B[0m"
-echo -e ""
-echo -e "\x1B[32m最后再继续运行 node_modules/textiot/build-post-npm.sh 中剩余内容\x1B[0m"
 ```
+* Fix IPFS 0.8.0 bug that LowWater and HighWater has no effect
+
+Ref to
+
+[Number of peers far exceeds lowWater/highWater settings](https://discuss.ipfs.io/t/number-of-peers-far-exceeds-lowwater-highwater-settings)
+
+[ipfs daemon memory usage grows overtime: killed by OOM after a 10~12 days running](https://github.com/ipfs/go-ipfs/issues/3532)
+
+[Garbage Collect per-peer bandwidth metrics](https://github.com/libp2p/go-libp2p-core/issues/80)
+
+Before running
+
+    go mod vendor
+
+in `node_modules/textiot/build-post-npm.sh` , add
+
+    github.com/libp2p/go-libp2p-peerstore v0.3.0
+
+in `node_modules/textiot/go-textile/go.mod` , then run
+
+    go mod download
+    go mod vendor
+
+Then copy `https://github.com/flyskywhy/go-libp2p-connmgr` branch `ipfs-v0.8.0`
+
+    connmgr.go
+    decay.go
+    options.go
+
+to `node_modules/textiot/go-textile/vendor/` to overwrite relevant files.
+
+Copy `https://github.com/flyskywhy/go-libp2p-peerstore` branch `ipfs-v0.8.0`
+
+    pstoremem/
+
+to `node_modules/textiot/go-textile/vendor/` to overwrite relevant folder.
+
+Copy `https://github.com/flyskywhy/go-libp2p-peerstore` branch `ipfs-v0.8.0`
+
+    metrics.go
+
+to `node_modules/textiot/go-textile/vendor/` to overwrite relevant file.
+
+In
+
+    type metrics interface
+
+of `node_modules/textiot/go-textile/vendor/github.com/libp2p/go-libp2p-core/peerstore/peerstore.go` , add
+
+    removepeer(peer.id)
+
+Finally, run remain in `node_modules/textiot/build-post-npm.sh` .
+
 ## Changelog
 ### textiot@2.0.0
 `go-ipfs v0.8.0`
