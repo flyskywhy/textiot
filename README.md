@@ -119,7 +119,7 @@ if `unrecognized import path "golang.org/x/mobile/cmd/gomobile` , then
 and also
 
     export GO111MODULE=on
-    export GOPROXY=https://goproxy.io
+    export GOPROXY=https://proxy.golang.com.cn,direct
 
 #### android sdk
 
