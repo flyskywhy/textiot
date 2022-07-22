@@ -245,6 +245,8 @@ js-http-client/dist/index.js
 ```
 
 ## patch
+Because `go mod vendor` will remove `vendor/` automatically then copy again from `~/go/pkg/mod/`, so if apply more than 1 patch, please only run `go mod vendor` once then apply the patches.
+
 ### patch to avoid crash sometimes on Android
 Fix `node.waitAdd` in `Textile.java` sometimes will crash. The uploadservice used by registerReceiver only needed by Cafe (server) function, and Android APP used in IoT generally does not need Cafe.
 ```
