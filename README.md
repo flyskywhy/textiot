@@ -313,6 +313,33 @@ of `node_modules/textiot/go-textile/vendor/github.com/libp2p/go-libp2p-core/peer
 
 Finally, run remain in `node_modules/textiot/build-post-npm.sh` .
 
+### patch to not write IPFS config file per APP start
+If IoT device start APP, and turn off the power just while APP writing IPFS config file, the file will be corrupted, thus cause APP crash. This patch to let APP write IPFS config file only diff.
+
+Write IPFS config file per APP start comes from `SetConfig()` call in `node_modules/textiot/go-textile/core/config.go` , and the patch is on `setConfigUnsynced()` in `node_modules/textiot/go-textile/vendor/github.com/ipfs/go-ipfs/repo/fsrepo/fsrepo.go` , just replace
+```
+	for k, v := range m {
+		mapconf[k] = v
+	}
+	if err := serialize.WriteConfigFile(configFilename, mapconf); err != nil {
+		return err
+	}
+```
+with
+```
+	"reflect"
+...
+	if reflect.DeepEqual(m, mapconf) == false {
+		for k, v := range m {
+			mapconf[k] = v
+		}
+
+		if err := serialize.WriteConfigFile(configFilename, mapconf); err != nil {
+			return err
+		}
+	}
+```
+
 ### patch to run on Android >= 11
 Patch with solution in [x/mobile: Calling net.InterfaceAddrs() fails on Android SDK 30](https://github.com/golang/go/issues/40569#issuecomment-1190950966).
 
