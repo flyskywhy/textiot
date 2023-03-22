@@ -205,6 +205,19 @@ regenerate:
 
 #### sudo apt install mingw-w64 gcc-arm-linux-gnueabihf
 
+#### riscv
+
+    git clone https://github.com/riscv-collab/riscv-gnu-toolchain
+    cd riscv-gnu-toolchain
+    ./configure --prefix=/opt/riscv
+    make linux
+
+    export PATH=/opt/riscv/bin:$PATH
+    cd go-textile
+    make textile-riscv
+
+If run `./textile-riscv` on some risc-v board got `Segmentation fault`, and `gdb textile-riscv` `run` got `SIGSEGV, Segmentation fault. transcmp at dcigettext.c:290`, then you need go to `riscv-gnu-toolchain/glibc` and git reset glibc from e.g. `glibc-2.33` to `glibc-2.37`, then `make linux` again and `make textile-riscv` again.
+
 #### Xcode on macOS
 
 ### Build on Linux
