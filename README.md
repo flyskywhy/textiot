@@ -203,7 +203,7 @@ regenerate:
     cd go-textile
     make protos
 
-#### suod apt install mingw-w64 gcc-arm-linux-gnueabihf
+#### sudo apt install mingw-w64 gcc-arm-linux-gnueabihf
 
 #### Xcode on macOS
 
